@@ -1,13 +1,12 @@
-package net.braniumacademy.lesson22.Exercises1;
+package net.braniumacademy.lesson22.Exercises2;
 
 /**
- * Lớp mô tả danh sách liên kết chứa hai node head, tail
+ * Lớp danh sách liên kết chỉ chứa 1 node head
  *
  * @param <T> Kiểu dữ liệu của phần dữ liệu trong mỗi node
  */
 public class LinkedList<T> {
     private Node<T> head;
-    private Node<T> tail;
 
     static class Node<T> {
         private T data;
@@ -53,23 +52,28 @@ public class LinkedList<T> {
         return head == null;
     }
 
+    // thêm node vào đầu danh sách
     public void insertHead(T data) {
         Node<T> p = new Node<>(data);
-        if (head == null) {
-            head = tail = p;
+        if (isEmpty()) {
+            head = p;
         } else {
             p.next = head;
             head = p;
         }
     }
 
+    // chèn vào cuối
     public void insertTail(T data) {
         Node<T> p = new Node<>(data);
         if (head == null) {
-            head = tail = p;
+            head = p;
         } else {
-            tail.next = p;
-            tail = p;
+            Node<T> current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = p;
         }
     }
 
