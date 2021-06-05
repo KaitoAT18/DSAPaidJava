@@ -1,7 +1,5 @@
 package net.braniumacademy.lesson23.Exercises1;
 
-import net.braniumacademy.lesson22.Exercises1.LinkedList;
-
 public class DoublyLinkedList<T> {
     private Node<T> head;
     private Node<T> tail;

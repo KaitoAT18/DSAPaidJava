@@ -20,7 +20,7 @@ public class TestEx1 {
         friends.traversalFromHead();
         // thêm vào trước node có giá trị x
         friends.insertBeforeX("Loan", "Nhung");
-        System.out.println("Sau khi thêm vào sau node có giá trị \"Nhung\":");
+        System.out.println("Sau khi thêm vào trước node có giá trị \"Nhung\":");
         friends.traversalFromHead();
         // thêm vào sau node thứ k
         friends.insertAfterK("Long", 3);
