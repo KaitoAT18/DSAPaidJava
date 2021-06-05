@@ -25,12 +25,14 @@ public class TestEx1 {
         // thêm vào sau node thứ k
         friends.insertAfterK("Long", 3);
         System.out.println("Sau khi thêm node vào sau node thứ " + 3 + ": ");
-        friends.traversalFromHead();
+        friends.traversalFromHead(); // duyệt xuôi
+        friends.traversalFromTail(); // duyệt ngược
         // tìm node giữa danh sách
         System.out.println("Giá trị node giữa danh sách liên kết: " + friends.findMidNodeData());
         // thêm node vào sau node giữa dslk
         friends.insertAfterMidNode("Phương");
         System.out.println("Sau khi thêm node vào sau node giữa danh sách liên kết: ");
-        friends.traversalFromHead();
+        friends.traversalFromHead(); // duyệt xuôi
+        friends.traversalFromTail(); // duyệt ngược
     }
 }

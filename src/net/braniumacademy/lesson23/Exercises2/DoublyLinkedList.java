@@ -50,7 +50,9 @@ public class DoublyLinkedList<T> {
             }
             nodeX = nodeX.next;
         }
-        if (nodeX != null) {
+        if (nodeX != null && nodeX.next == null) {
+            insertTail(data);
+        } else if (nodeX != null) {
             p.next = nodeX.next; // cập nhật next của p
             p.prev = nodeX;      // cập nhật prev của p
             nodeX.next.prev = p; // cập nhật prev của node sau p
@@ -86,8 +88,10 @@ public class DoublyLinkedList<T> {
             // kiểm tra lại nếu nodeX khác null == tìm thấy node có giá trị bằng x
             if (nodeX != null) {
                 Node<T> p = new Node<>(data);
-                p.next = nodeX; // cập nhật next của p
-                nodeBeforeX.next = p; // cập nhật node trước nodeX
+                p.next = nodeX;         // cập nhật next của p
+                p.prev = nodeBeforeX;   // cập nhật prev của p
+                nodeX.prev = p;         // cập nhật prev của nodeX
+                nodeBeforeX.next = p;   // cập nhật node trước nodeX
             } else { // trường hợp không tìm thấy node có giá trị bằng X
                 System.out.println("Không tìm thấy node có giá trị bằng " + x);
             }
@@ -108,9 +112,13 @@ public class DoublyLinkedList<T> {
                 count++;
                 node = node.next;
             }
-            if (node != null) { // nếu tìm thấy node thứ k
+            if (node != null && node.next == null) {
+                insertTail(data);
+            } else if (node != null) { // nếu tìm thấy node thứ k
                 Node<T> p = new Node<>(data);
                 p.next = node.next;
+                node.next.prev = p;
+                p.prev = node;
                 node.next = p;
             } else {
                 System.out.println("Không tìm thấy node thứ " + k);
@@ -142,6 +150,8 @@ public class DoublyLinkedList<T> {
         Node<T> midNode = findMidNode();
         Node<T> p = new Node<>(data);
         p.next = midNode.next;  // cập nhật next của p
+        p.prev = midNode;       // cập nhật prev của p
+        midNode.next.prev = p;  // cập nhật prev của node sau p
         midNode.next = p;       // cập nhật next của node giữa
     }
 
