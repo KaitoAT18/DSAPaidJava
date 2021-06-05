@@ -129,7 +129,7 @@ public class DoublyLinkedList<T> {
     }
 
     // tìm node giữa của danh sách liên kết
-    Node<T> findMidNode() {
+    private Node<T> findMidNode() {
         Node<T> currentNode = head;
         Node<T> midNode = head;
         while (currentNode != null && currentNode.next != null && currentNode.next.next != null) {
