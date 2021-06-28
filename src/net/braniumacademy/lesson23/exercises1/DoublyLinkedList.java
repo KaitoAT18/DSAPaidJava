@@ -1,21 +1,66 @@
-package net.braniumacademy.lesson22.Exercises2;
+package net.braniumacademy.lesson23.exercises1;
 
-/**
- * Lớp danh sách liên kết chỉ chứa 1 node head
- *
- * @param <T> Kiểu dữ liệu của phần dữ liệu trong mỗi node
- */
-public class LinkedList<T> {
+public class DoublyLinkedList<T> {
     private Node<T> head;
+    private Node<T> tail;
 
     static class Node<T> {
         private T data;
         private Node<T> next;
+        private Node<T> prev;
 
         public Node(T data) {
             this.data = data;
             this.next = null;
+            this.prev = null;
         }
+    }
+
+    public void insertHead(T data) {
+        Node<T> p = new Node<>(data);
+        if(head == null) {
+            head = tail = p;
+        } else {
+            p.next = head;  // next của p chính là head cũ
+            head.prev = p;  // prev của head cũ là p
+            head = p;       // cập nhật lại head mới
+        }
+    }
+
+    public void insertTail(T data) {
+        Node<T> p = new Node<>(data);
+        if(head == null) {
+            head = tail = p;
+        } else {
+            tail.next = p;  // next của tail cũ là p
+            p.prev = tail;  // prev của p là tail cũ
+            tail = p;       // cập nhật lại tail mới
+        }
+    }
+
+    public void insertAfterX(T data, T x) {
+        Node<T> p = new Node<>(data);
+        Node<T> nodeX = head;
+        while (nodeX != null) {
+            if(nodeX.data == x) {
+                break;
+            }
+            nodeX = nodeX.next;
+        }
+        if (nodeX != null && nodeX == tail) {
+            insertTail(data);
+        } else if(nodeX != null) {
+            p.next = nodeX.next; // cập nhật next của p
+            p.prev = nodeX;      // cập nhật prev của p
+            nodeX.next.prev = p; // cập nhật prev của node sau p
+            nodeX.next = p;      // cập nhật next của nodeX
+        } else {
+            System.out.println("Không tìm thấy node mục tiêu.");
+        }
+    }
+
+    public boolean isEmpty() {
+        return head == null;
     }
 
     // thêm node vào trước node có giá trị bằng x
@@ -40,58 +85,13 @@ public class LinkedList<T> {
             // kiểm tra lại nếu nodeX khác null == tìm thấy node có giá trị bằng x
             if (nodeX != null) {
                 Node<T> p = new Node<>(data);
-                p.next = nodeX; // cập nhật next của p
-                nodeBeforeX.next = p; // cập nhật node trước nodeX
+                p.next = nodeX;         // cập nhật next của p
+                p.prev = nodeBeforeX;   // cập nhật prev của p
+                nodeX.prev = p;         // cập nhật prev của nodeX
+                nodeBeforeX.next = p;   // cập nhật node trước nodeX
             } else { // trường hợp không tìm thấy node có giá trị bằng X
                 System.out.println("Không tìm thấy node có giá trị bằng " + x);
             }
-        }
-    }
-
-    public boolean isEmpty() {
-        return head == null;
-    }
-
-    // thêm node vào đầu danh sách
-    public void insertHead(T data) {
-        Node<T> p = new Node<>(data);
-        if (isEmpty()) {
-            head = p;
-        } else {
-            p.next = head;
-            head = p;
-        }
-    }
-
-    // chèn vào cuối
-    public void insertTail(T data) {
-        Node<T> p = new Node<>(data);
-        if (head == null) {
-            head = p;
-        } else {
-            Node<T> current = head;
-            while (current.next != null) {
-                current = current.next;
-            }
-            current.next = p;
-        }
-    }
-
-    // chèn node mới sau node có giá trị x
-    public void insertAfterX(T data, T x) {
-        Node<T> p = new Node<>(data);
-        Node<T> nodeX = head;
-        while (nodeX != null) {
-            if (nodeX.data == x) {
-                break;
-            }
-            nodeX = nodeX.next;
-        }
-        if (nodeX != null) {
-            p.next = nodeX.next;
-            nodeX.next = p;
-        } else {
-            System.out.println("Không tìm thấy node mục tiêu.");
         }
     }
 
@@ -109,9 +109,13 @@ public class LinkedList<T> {
                 count++;
                 node = node.next;
             }
-            if (node != null) { // nếu tìm thấy node thứ k
+            if (node != null && node.next == null) {
+                insertTail(data);
+            } else if (node != null) { // nếu tìm thấy node thứ k
                 Node<T> p = new Node<>(data);
                 p.next = node.next;
+                node.next.prev = p;
+                p.prev = node;
                 node.next = p;
             } else {
                 System.out.println("Không tìm thấy node thứ " + k);
@@ -132,7 +136,7 @@ public class LinkedList<T> {
         return midNode;
     }
 
-    // tìm node chính giữa của danh sách liên kết
+    // tìm dữ liệu node giữa của danh sách liên kết
     public T findMidNodeData() {
         Node<T> midNode = findMidNode();
         return midNode == null ? null : midNode.data;
@@ -143,11 +147,21 @@ public class LinkedList<T> {
         Node<T> midNode = findMidNode();
         Node<T> p = new Node<>(data);
         p.next = midNode.next;  // cập nhật next của p
+        p.prev = midNode;       // cập nhật prev của p
+        midNode.next.prev = p;  // cập nhật prev của node sau p
         midNode.next = p;       // cập nhật next của node giữa
     }
 
-    public void showList() {
+
+    public void traversalFromHead() {
         for (var node = head; node != null; node = node.next) {
+            System.out.print(node.data + " -> ");
+        }
+        System.out.println("null");
+    }
+
+    public void traversalFromTail() {
+        for (var node = tail; node != null; node = node.prev) {
             System.out.print(node.data + " -> ");
         }
         System.out.println("null");

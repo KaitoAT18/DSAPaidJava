@@ -1,6 +1,8 @@
-package net.braniumacademy.lesson22.Exercises1;
+package net.braniumacademy.lesson22.exercises2;
 
-public class TestEx1 {
+import net.braniumacademy.lesson22.exercises1.LinkedList;
+
+public class TestEx2 {
     public static void main(String[] args) {
         LinkedList<String> list = new LinkedList<>();
         // thêm node vào cuối danh sách liên kết đơn

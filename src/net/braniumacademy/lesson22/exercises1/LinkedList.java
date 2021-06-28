@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson22.Exercises1;
+package net.braniumacademy.lesson22.exercises1;
 
 /**
  * Lớp mô tả danh sách liên kết chứa hai node head, tail

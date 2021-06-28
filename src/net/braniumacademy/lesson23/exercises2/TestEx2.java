@@ -1,6 +1,8 @@
-package net.braniumacademy.lesson23.Exercises1;
+package net.braniumacademy.lesson23.exercises2;
 
-public class TestEx1 {
+import net.braniumacademy.lesson23.exercises1.DoublyLinkedList;
+
+public class TestEx2 {
     public static void main(String[] args) {
         DoublyLinkedList<String> friends = new DoublyLinkedList<>();
         // thêm vào cuối danh sách liên kết
@@ -25,14 +27,12 @@ public class TestEx1 {
         // thêm vào sau node thứ k
         friends.insertAfterK("Long", 3);
         System.out.println("Sau khi thêm node vào sau node thứ " + 3 + ": ");
-        friends.traversalFromHead(); // duyệt xuôi
-        friends.traversalFromTail(); // duyệt ngược
+        friends.traversalFromHead();
         // tìm node giữa danh sách
         System.out.println("Giá trị node giữa danh sách liên kết: " + friends.findMidNodeData());
         // thêm node vào sau node giữa dslk
         friends.insertAfterMidNode("Phương");
         System.out.println("Sau khi thêm node vào sau node giữa danh sách liên kết: ");
-        friends.traversalFromHead(); // duyệt xuôi
-        friends.traversalFromTail(); // duyệt ngược
+        friends.traversalFromHead();
     }
 }

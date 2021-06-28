@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson23.Exercises2;
+package net.braniumacademy.lesson23.exercises2;
 
 public class DoublyLinkedList<T> {
     Node<T> head;
