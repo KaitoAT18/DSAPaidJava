@@ -1,6 +1,5 @@
 package net.braniumacademy.lesson26.exercises4;
 
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
