@@ -1,11 +1,14 @@
 package net.braniumacademy.lesson29.exercises1;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class TestExercises1 {
     public static void main(String[] args) {
         LinkedList<Student> listStudent = new LinkedList<>();
+        createFakeData(listStudent);
         int choice;
         Scanner input = new Scanner(System.in);
         do {
@@ -179,7 +182,7 @@ public class TestExercises1 {
                         System.out.println("Danh sách sinh viên có điểm TB >= " + gpa + ":");
                         for (var e : listStudent) {
                             if (e.getGpa() >= gpa) {
-                                System.out.println(e);
+                                studentInfo(e);
                                 counter++;
                             }
                         }
@@ -194,9 +197,11 @@ public class TestExercises1 {
                         System.out.println("Nhập cụm từ cần tìm");
                         String regex = input.nextLine();
                         System.out.println("Danh sách sinh viên thỏa mãn:");
+                        System.out.printf("%-15s%-15s%-15s%-15s%-20s%-30s%-10s%-15s\n",
+                                "Mã SV", "Họ", "Đệm", "Tên", "Địa chỉ", "Email", "Tuổi", "Điểm TB");
                         for (var e : listStudent) {
-                            if (e.getFirstName().toLowerCase().matches("%" + regex.toLowerCase() + "%")) {
-                                System.out.println(e);
+                            if (e.getFirstName().toLowerCase().matches(".*" + regex.toLowerCase() + ".*")) {
+                                studentInfo(e);
                                 isExist = true;
                             }
                         }
@@ -222,6 +227,35 @@ public class TestExercises1 {
             }
         }
         while (choice != 0);
+    }
+
+    private static void createFakeData(LinkedList<Student> listStudent) {
+        String fileName = "input2.9.1.txt";
+        try {
+            Scanner fileReader = new Scanner(new File(fileName));
+            while (fileReader.hasNextLine()) {
+                String id;
+                String firstName;
+                String lastName;
+                String midName;
+                String address;
+                String email;
+                int age;
+                float gpa;
+                id = fileReader.nextLine();
+                lastName = fileReader.nextLine();
+                midName = fileReader.nextLine();
+                firstName = fileReader.nextLine();
+                address = fileReader.nextLine();
+                email = fileReader.nextLine();
+                age = Integer.parseInt(fileReader.nextLine());
+                gpa = Float.parseFloat(fileReader.nextLine());
+                Student s = new Student(id, firstName, lastName, midName, address, email, age, gpa);
+                listStudent.add(s);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void showListElements(LinkedList<Student> list) {

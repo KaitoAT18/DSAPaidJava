@@ -1,0 +1,56 @@
+B25DCCN100
+Trần
+Văn
+Nam
+Hà Nội
+nam@xmail.com
+23
+3.25
+B25DCCN101
+Hoàng
+Văn
+Yoo
+Hà Nội
+yooo@xmail.com
+20
+3.17
+B25DCCN103
+Ngô
+Văn
+Tài
+Hà Nội
+taingo@xmail.com
+22
+3.29
+B25DCCN102
+Trần
+Thị
+Hiền
+Hà Nội
+hien@xmail.com
+21
+3.69
+B25DCCN105
+Nguyễn
+Thị Hương
+Giang
+Hà Nội
+gianghuong@xmail.com
+24
+3.75
+B25DCCN104
+Mai
+Thúi
+Thúi
+Hà Nội
+thiuthiu@xmail.com
+20
+3.37
+B25DCCN109
+Quăn
+Quăn Siêu
+Xoắn
+Hà Nội
+daquanconxoan@xmail.com
+21
+3.62
