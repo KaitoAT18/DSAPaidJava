@@ -118,4 +118,18 @@ public class Student {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", midName='" + midName + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", gpa=" + gpa +
+                '}';
+    }
 }
