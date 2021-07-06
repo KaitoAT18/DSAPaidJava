@@ -110,4 +110,18 @@ public class BankAccount {
     public int hashCode() {
         return Objects.hash(cardNumber, accountNumber);
     }
+
+    @Override
+    public String toString() {
+        return "BankAccount{" +
+                "owner='" + owner + '\'' +
+                ", cardNumber='" + cardNumber + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", cardType='" + cardType + '\'' +
+                ", bankName='" + bankName + '\'' +
+                ", releaseDate=" + releaseDate +
+                ", expirationDate=" + expirationDate +
+                ", ballance=" + ballance +
+                '}';
+    }
 }
