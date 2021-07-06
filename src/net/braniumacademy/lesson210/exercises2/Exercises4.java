@@ -1,11 +1,11 @@
-package net.braniumacademy.lesson29.exercises2;
+package net.braniumacademy.lesson210.exercises2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Exercises4 {
@@ -13,7 +13,7 @@ public class Exercises4 {
         int choice;
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Scanner input = new Scanner(System.in);
-        LinkedList<BankAccount> listAcc = new LinkedList<>();
+        ArrayList<BankAccount> listAcc = new ArrayList<>();
         createFakeData(listAcc);
         do {
             System.out.println("======================== MENU ========================");
@@ -287,7 +287,7 @@ public class Exercises4 {
         } while (choice != 0);
     }
 
-    private static void showListElements(LinkedList<BankAccount> listAcc) {
+    private static void showListElements(ArrayList<BankAccount> listAcc) {
         for (var e : listAcc) {
             showBankAccInfo(e);
         }
@@ -299,7 +299,7 @@ public class Exercises4 {
                 "Ngày PH", "Hạn SD", "Số dư");
     }
 
-    private static void createFakeData(LinkedList<BankAccount> listAcc) {
+    private static void createFakeData(ArrayList<BankAccount> listAcc) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Scanner input;
         try {
