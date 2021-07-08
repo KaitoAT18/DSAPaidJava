@@ -7,7 +7,7 @@ public class Exercises5 {
     public static void main(String[] args) {
         int t; // số bộ test
         int n; // số phần tử của từng bộ test
-        int x; // giá trị cần chèn
+        int x; // giá trị cần xóa
         int[] arr;
         Scanner input = new Scanner(System.in);
         t = input.nextInt();
