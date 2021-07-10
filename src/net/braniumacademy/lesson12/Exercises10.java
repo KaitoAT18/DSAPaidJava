@@ -6,6 +6,7 @@ import java.util.Scanner;
  * @author Branium Academy
  * @version 2021.07
  * @website https://braniumacademy.net/
+ *
  */
 
 public class Exercises10 {
