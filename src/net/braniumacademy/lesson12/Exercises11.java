@@ -2,6 +2,12 @@ package net.braniumacademy.lesson12;
 
 import java.util.Scanner;
 
+/**
+ * @author Branium Academy
+ * @version 2021.07
+ * @website https://braniumacademy.net/
+ */
+
 public class Exercises11 {
     public static void main(String[] args) {
         int[][] arr;
