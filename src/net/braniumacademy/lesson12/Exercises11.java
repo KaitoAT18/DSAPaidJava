@@ -21,6 +21,11 @@ public class Exercises11 {
         showResult(arr);
     }
 
+    /**
+     * Phương thức hiển thị các phần tử mảng hai chiều.
+     *
+     * @param arr mảng chứa nội dung cần hiển thị.
+     */
     private static void showResult(int[][] arr) {
         for (var row : arr) {
             for (var e : row) {
