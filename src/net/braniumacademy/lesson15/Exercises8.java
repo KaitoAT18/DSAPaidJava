@@ -21,7 +21,7 @@ public class Exercises8 {
      * th1: tập chứa phần tử cuối, tổng cần xét bằng tổng mục tiêu - giá trị phần tử cuối.
      * th2: tập không chứa phần tử cuối, tổng cần xét = tổng mục tiêu.
      */
-    static boolean isSubsetSum(int[] set, int n, int sum) {
+    static boolean isSubsetSum(int[] set, int n, int sum) { // top-down
         if (sum == 0) { // nếu tổng == 0 -> true vì có 1 cách không chọn phần tử nào trong tập hợp
             return true;
         }
