@@ -40,7 +40,7 @@ public class Exercises9 {
      *      if(nextUglyNumber == nextMultilpleOf5):
      *          i5++;
      *          nextMultilpleOf5 = ugly[i5] * 5;
-     * B6. trả về số xấu xí thứ n
+     * B6. trả về số xấu xí tiếp theo
      *
      * @param n thứ tự số xấu xí cần tìm
      * @return số xấu xí thứ n
