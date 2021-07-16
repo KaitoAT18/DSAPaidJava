@@ -2,6 +2,12 @@ package net.braniumacademy.lesson32.exercises1;
 
 import java.lang.reflect.Array;
 
+/**
+ * @author Branium Academy
+ * @version 2021.07
+ * @website https://braniumacademy.net/
+ */
+
 public class Stack<T> {
     private int size;       // số phần tử thực tế hiện có trong stack
     private int capacity;   // số phần tử tối đa có thể chứa của stack

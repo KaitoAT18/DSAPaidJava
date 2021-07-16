@@ -2,6 +2,12 @@ package net.braniumacademy.lesson33.exercises1;
 
 import java.util.Scanner;
 
+/**
+ * @author Branium Academy
+ * @version 2021.07
+ * @website https://braniumacademy.net/
+ */
+
 public class Exercises1 {
     public static void main(String[] args) {
         // tạo stack tối đa 100 phần tử

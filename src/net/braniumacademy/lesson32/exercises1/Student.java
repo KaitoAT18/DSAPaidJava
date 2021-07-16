@@ -2,6 +2,12 @@ package net.braniumacademy.lesson32.exercises1;
 
 import java.util.Objects;
 
+/**
+ * @author Branium Academy
+ * @version 2021.07
+ * @website https://braniumacademy.net/
+ */
+
 public class Student {
     private String id;
     private String firstName;

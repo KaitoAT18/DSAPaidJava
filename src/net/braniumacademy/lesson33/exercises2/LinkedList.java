@@ -1,5 +1,11 @@
 package net.braniumacademy.lesson33.exercises2;
 
+/**
+ * @author Branium Academy
+ * @version 2021.07
+ * @website https://braniumacademy.net/
+ */
+
 public class LinkedList<T> {
     private Node<T> head;
 
