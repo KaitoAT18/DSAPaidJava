@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson32.exercises1;
+package net.braniumacademy.lesson32.exercises3;
 
 import java.lang.reflect.Array;
 
@@ -49,7 +49,7 @@ public class Stack<T> {
 
     public void pop() { // xóa phần tử đầu stack nếu stack không rỗng
         if (!isEmpty()) {
-            data[size - 1] = null;
+            data[size-1] = null;
             size--;
         } else {
             System.out.println("Stack rỗng.");

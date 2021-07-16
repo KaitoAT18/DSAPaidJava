@@ -49,7 +49,8 @@ public class Stack<T> {
 
     public void pop() { // xóa phần tử đầu stack nếu stack không rỗng
         if (!isEmpty()) {
-            data[size--] = null;
+            data[size - 1] = null;
+            size--;
         } else {
             System.out.println("Stack rỗng.");
         }

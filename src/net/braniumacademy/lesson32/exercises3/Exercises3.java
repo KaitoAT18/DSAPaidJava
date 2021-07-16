@@ -1,8 +1,6 @@
-package net.braniumacademy.lesson34.exercises3;
+package net.braniumacademy.lesson32.exercises3;
 
 import java.util.Scanner;
-import java.util.Stack;
-
 /**
  * @author Branium Academy
  * @version 2021.07
@@ -70,14 +68,17 @@ public class Exercises3 {
         for (var e : infixElements) {
             if (precedence(e) > 0) { // e là toán tử
                 while (!stack.isEmpty() && precedence(e) <= precedence(stack.peek())) {
-                    result.append(stack.pop()).append(" ");
+                    result.append(stack.peek()).append(" ");
+                    stack.pop();
                 }
                 stack.push(e);
             } else if (e.equals(")")) { // là dấu ngoặc đóng
-                var operator = stack.pop();
+                var operator = stack.peek();
+                stack.pop();
                 while (!operator.equals("(")) {
                     result.append(operator).append(" ");
-                    operator = stack.pop();
+                    operator = stack.peek();
+                    stack.pop();
                 }
 
             } else if (e.equals("(")) { // là dấu ngoặc mở
@@ -88,7 +89,8 @@ public class Exercises3 {
         }
         // pop các phần tử còn lại của stack
         while (!stack.isEmpty()) {
-            var operator = stack.pop();
+            var operator = stack.peek();
+            stack.pop();
             if (!operator.equals("(")) {
                 result.append(operator).append(" ");
             }

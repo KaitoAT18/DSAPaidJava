@@ -1,7 +1,6 @@
-package net.braniumacademy.lesson34.exercises3;
+package net.braniumacademy.lesson33.exercises3;
 
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * @author Branium Academy
@@ -31,7 +30,7 @@ public class Exercises3 {
      * @return thứ tự ưu tiên của toán tử đang xét trong đề bài.
      */
     private static int precedence(String operator) {
-        return switch (operator) {
+        return switch (operator) { // hỗ trợ từ java 12+
             case "+", "-" -> 1;
             case "*", "/" -> 2;
             case "^" -> 3;
