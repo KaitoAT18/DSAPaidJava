@@ -27,21 +27,21 @@ public class Exercises4 {
      * @param str biểu thức hậu tố đầu vào
      * @return kết quả tính toán được
      */
-    private static long calculateResult(String str) {
-        long result = 0;
+    private static double calculateResult(String str) {
+        double result;
         Stack<String> stack = new Stack<>();
         String[] words = str.split("\\s+"); // tách biểu thức tại vị trí có 1 hoặc nhiều dấu cách
         for (var e : words) {
             if (isOperator(e)) {
-                long b = Long.parseLong(stack.pop());
-                long a = Long.parseLong(stack.pop());
+                double b = Double.parseDouble(stack.pop());
+                double a = Double.parseDouble(stack.pop());
                 result = makeResult(a, b, e);
                 stack.push(result + "");
             } else {
                 stack.push(e);
             }
         }
-        return Long.parseLong(stack.pop());
+        return Double.parseDouble(stack.pop());
     }
 
     /**
@@ -52,13 +52,13 @@ public class Exercises4 {
      * @param e toán tử
      * @return giá trị đạt được
      */
-    private static long makeResult(long a, long b, String e) {
+    private static double makeResult(double a, double b, String e) {
         return switch (e) {
             case "+" -> a + b;
             case "-" -> a - b;
             case "*" -> a * b;
             case "/" -> a / b;
-            case "^" -> (long) Math.pow(a, b);
+            case "^" -> Math.pow(a, b);
             default -> 0;
         };
     }

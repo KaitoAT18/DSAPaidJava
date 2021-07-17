@@ -1,6 +1,7 @@
-package net.braniumacademy.lesson32.exercises4;
+package net.braniumacademy.lesson34.exercises4;
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Exercises4 {
     public static void main(String[] args) {
@@ -21,23 +22,27 @@ public class Exercises4 {
                 input.equals("/") || input.equals("^");
     }
 
+    /**
+     * Phương thức tính toán giá trị biểu thức dạng hậu tố
+     *
+     * @param str biểu thức hậu tố đầu vào
+     * @return kết quả tính toán được
+     */
     private static double calculateResult(String str) {
         double result;
-        Stack<String> stack = new Stack<>(String.class);
+        Stack<String> stack = new Stack<>();
         String[] words = str.split("\\s+"); // tách biểu thức tại vị trí có 1 hoặc nhiều dấu cách
         for (var e : words) {
             if (isOperator(e)) {
-                double b = Double.parseDouble(stack.peek());
-                stack.pop();
-                double a = Double.parseDouble(stack.peek());
-                stack.pop();
+                double b = Double.parseDouble(stack.pop());
+                double a = Double.parseDouble(stack.pop());
                 result = makeResult(a, b, e);
                 stack.push(result + "");
             } else {
                 stack.push(e);
             }
         }
-        return Double.parseDouble(stack.peek());
+        return Double.parseDouble(stack.pop());
     }
 
     /**
