@@ -17,44 +17,38 @@ public class Exercises1 {
         Scanner input = new Scanner(System.in);
         n = input.nextInt();
         int max = n;
-        if(n == 1) {
-            System.out.println(1);
-        } else {
-            Queue queue = new Queue();
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < n; i++) {
-                int x = input.nextInt();
-                queue.enqueue(x);
-                queue.sort();
-                while (!queue.isEmpty() && queue.peek() == max) {
-                    builder.append(queue.dequeue()).append(" ");
-                    max--;
-                }
-                builder.append("\n");
+        Queue<Integer> queue = new Queue<>();
+        for (int i = 0; i < n; i++) {
+            int x = input.nextInt();
+            queue.enqueue(x);
+            queue.sort();
+            while (!queue.isEmpty() && queue.peek() == max) {
+                System.out.print(queue.dequeue() + " ");
+                --max;
             }
-            System.out.println(builder.toString());
+            System.out.println();
         }
     }
 }
 
-class Queue {
+class Queue<E extends Integer> {
     private int currentElement; // số lượng phần tử hiện thời có trong queue
-    private ArrayList<Integer> data; // lưu trữ các phần tử trong queue
+    private ArrayList<E> data; // lưu trữ các phần tử trong queue
 
     public Queue() {
         currentElement = 0;
         data = new ArrayList<>();
     }
 
-    public void enqueue(Integer e) {
+    public void enqueue(E e) {
         data.add(e); // thêm vào cuối array list
         currentElement++;
     }
 
-    public Integer dequeue() {
+    public E dequeue() {
         if (!isEmpty()) {
             currentElement--; // giảm số lượng phần tử thực tế hiện có của queue
-            Integer e = data.get(0); // lấy ở đầu array list
+            E e = data.get(0); // lấy ở đầu array list
             data.remove(0); // xóa phần tử đầu
             return e;
         }
@@ -65,7 +59,7 @@ class Queue {
         return currentElement == 0;
     }
 
-    public Integer peek() {
+    public E peek() {
         return isEmpty() ? null : data.get(0);
     }
 
@@ -74,7 +68,7 @@ class Queue {
     }
 
     public void sort() {
-        data.sort((o1, o2) -> o2 - o1);
+        data.sort((o1, o2) -> o2.intValue() - o1.intValue());
     }
 }
 
