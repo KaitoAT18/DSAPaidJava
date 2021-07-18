@@ -11,9 +11,9 @@ public class Exercises10 {
         } else if (n < 12) { // trường hợp cơ sở
             return n;
         } else {
-//            if (n < 1000000) {
+            if (n < 1000000) {
                 if (r[(int) n] > 0) return r[(int) n];
-//            }
+            }
             long m = Math.max(n, coin(n / 2) + coin(n / 3) + coin(n / 4));
             if (n < 1000000) {
                 r[(int) n] = m;
