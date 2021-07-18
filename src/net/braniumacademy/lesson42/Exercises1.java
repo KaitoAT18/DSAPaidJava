@@ -17,16 +17,22 @@ public class Exercises1 {
         Scanner input = new Scanner(System.in);
         n = input.nextInt();
         int max = n;
-        Queue queue = new Queue();
-        for (int i = 0; i < n; i++) {
-            int x = input.nextInt();
-            queue.enqueue(x);
-            queue.sort();
-            while (!queue.isEmpty() && queue.peek() == max) {
-                System.out.print(queue.dequeue() + " ");
-                max--;
+        if(n == 1) {
+            System.out.println(1);
+        } else {
+            Queue queue = new Queue();
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < n; i++) {
+                int x = input.nextInt();
+                queue.enqueue(x);
+                queue.sort();
+                while (!queue.isEmpty() && queue.peek() == max) {
+                    builder.append(queue.dequeue()).append(" ");
+                    max--;
+                }
+                builder.append("\n");
             }
-            System.out.println();
+            System.out.println(builder.toString());
         }
     }
 }
