@@ -14,10 +14,11 @@ public class Exercises10 {
             if (n < 1000000) {
                 if (result[(int) n] > 0) return result[(int) n];
             }
+            long tmp = Math.max(n, coin(n / 2) + coin(n / 3) + coin(n / 4));
             if (n < 1000000) {
-                result[(int) n] = Math.max(n, coin(n / 2) + coin(n / 3) + coin(n / 4));
+                result[(int) n] = tmp;
             }
-            return result[(int)n];
+            return tmp;
         }
     }
 
