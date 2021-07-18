@@ -3,7 +3,7 @@ package net.braniumacademy.lesson15;
 import java.util.Scanner;
 
 public class Exercises10 {
-    private static long r[] = new long[1000000]; // tối đa 100k phần tử
+    private static long result[] = new long[1000000]; // tối đa 100k phần tử
 
     private static long coin(long n) {
         if (n == 0) { // trường hợp cơ sở
@@ -12,13 +12,12 @@ public class Exercises10 {
             return n;
         } else {
             if (n < 1000000) {
-                if (r[(int) n] > 0) return r[(int) n];
+                if (result[(int) n] > 0) return result[(int) n];
             }
-            long m = Math.max(n, coin(n / 2) + coin(n / 3) + coin(n / 4));
             if (n < 1000000) {
-                r[(int) n] = m;
+                result[(int) n] = Math.max(n, coin(n / 2) + coin(n / 3) + coin(n / 4));
             }
-            return m;
+            return result[(int)n];
         }
     }
 
