@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson44;
+package net.braniumacademy.lesson44.exercises1;
 
 import net.braniumacademy.lesson28.exercises3.Student;
 

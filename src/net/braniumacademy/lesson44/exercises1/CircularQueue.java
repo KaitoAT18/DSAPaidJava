@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson44;
+package net.braniumacademy.lesson44.exercises1;
 
 public class CircularQueue<E> {
     private int currentElement; // số phần tử hiện thời của hàng đợi vòng
