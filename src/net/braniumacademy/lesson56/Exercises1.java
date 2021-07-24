@@ -1,5 +1,7 @@
 package net.braniumacademy.lesson56;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Exercises1 {
@@ -22,40 +24,55 @@ public class Exercises1 {
             System.out.println("0. Thoát chương trình.");
             System.out.println("Bạn chọn?");
             choice = input.nextInt();
+            input.nextLine();
             switch (choice) { // biểu thức switch, hỗ trợ từ phiên bản java 12+
                 case 0 -> System.out.println("<== Phiên làm việc kết thúc ==>");
                 case 1 -> {
-
+                    System.out.println("Nhập tên file đầu vào: ");
+                    String fileName = input.nextLine();
+                    tree = new BinarySearchTree<>(); // new một cây nhị phân tìm kiếm mới
+                    readInputFile(tree, fileName);
                 }
                 case 2 -> {
-
+                    System.out.println("Các node của cây nhị phân tìm kiếm: ");
+                    tree.inOrder();
+                    System.out.println();
                 }
                 case 3 -> {
-
+                    System.out.println("Nhập giá trị cần tìm: ");
+                    int x = input.nextInt();
+                    System.out.println((tree.search(x) ? "Tìm thấy " : "Không tìm thấy ") + x);
                 }
-                case 4 -> {
-
-                }
-                case 5 -> {
-
-                }
-                case 6 -> {
-
-                }
-                case 7 -> {
-
-                }
+                case 4 -> System.out.println("Tổng số node của cây: " + tree.countNodes());
+                case 5 -> System.out.println("Số node lá trên cây: " + tree.countLeafNodes());
+                case 6 -> System.out.println("Số lượng node cành trên cây: " + tree.countBranchNodes());
+                case 7 -> System.out.println("Số lượng node có 2 cây con: " + tree.countTwoSubtreeNodes());
                 case 8 -> {
-
+                    System.out.println("Nhập giá trị node x: ");
+                    int x = input.nextInt();
+                    System.out.println("Độ sâu của node x: " + tree.deepOfX(x));
                 }
-                case 9 -> {
-
-                }
+                case 9 -> System.out.println("Chiều cao của cây: " + tree.height());
                 case 10 -> {
-
+                    System.out.println("Nhập giá trị node x: ");
+                    int x = input.nextInt();
+                    System.out.println("Bậc của node x: " + tree.levelOfNode(x));
                 }
                 default -> System.out.println("<== Sai chức năng, vui lòng kiểm tra lại ==>");
             }
         } while (choice != 0);
+    }
+
+    private static void readInputFile(BinarySearchTree<Integer> tree, String fileName) {
+        // sử dụng try-with-resource
+        try (var fileReader = new Scanner(new File(fileName))) {
+            var n = fileReader.nextInt();
+            for (int i = 0; i < n; i++) {
+                var x = fileReader.nextInt();
+                tree.add(x);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
