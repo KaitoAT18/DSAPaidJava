@@ -1,8 +1,10 @@
-package net.braniumacademy.lesson44.exercises2;
+package net.braniumacademy.lesson44.exercises3;
+
+import net.braniumacademy.lesson44.exercises2.CircularQueue;
 
 import java.util.Scanner;
 
-public class Exercises1 {
+public class Exercises3 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.println("Nhập số phần tử của hàng đợi: ");
