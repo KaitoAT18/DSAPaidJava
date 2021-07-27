@@ -94,14 +94,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
             } else if (r.rightNode == null) {
                 r = r.leftNode;
             } else {
-                r.data = findMinNode(r.rightNode, x);
+                r.data = findMinNode(r.rightNode);
                 r.rightNode = remove(r.rightNode, r.data);
             }
         }
         return r;
     }
 
-    private T findMinNode(Node<T> r, T x) {
+    private T findMinNode(Node<T> r) {
         while (r.leftNode != null) {
             r = r.leftNode;
         }

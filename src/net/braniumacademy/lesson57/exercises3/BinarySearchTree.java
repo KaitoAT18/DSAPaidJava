@@ -1,9 +1,32 @@
-package net.braniumacademy.lesson57.exercises1;
+package net.braniumacademy.lesson57.exercises3;
 
-public class BinarySearchTree<T extends Comparable<T>> {
+import java.util.ArrayList;
+import java.util.List;
+
+public class BinarySearchTree<T extends Number> {
     private Node<T> root;
 
-    static class Node<T> {
+    public int removeEvenNodes() {
+        List<T> leafNodes = new ArrayList<>();
+        findEvenNodes(root, leafNodes);
+        for (var e : leafNodes) {
+            remove(e);
+        }
+        return leafNodes.size();
+    }
+
+    private void findEvenNodes(Node<T> r, List<T> leafNodes) {
+        if (r == null) {
+            return; // end game
+        }
+        if (r.data.intValue() % 2 == 0) {
+            leafNodes.add(r.data);
+        }
+        findEvenNodes(r.leftNode, leafNodes);
+        findEvenNodes(r.rightNode, leafNodes);
+    }
+
+    static class Node<T extends Number> {
         private Node<T> leftNode;
         private Node<T> rightNode;
         private T data;
@@ -31,13 +54,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> add(Node<T> r, T t) {
         if (r == null) {
             return new Node<>(t);
-        } else if (r.data.compareTo(t) > 0) {
+        } else if (r.data.intValue() - t.intValue() > 0) {
             r.leftNode = add(r.leftNode, t);
-        } else if (r.data.compareTo(t) < 0) {
+        } else if (r.data.intValue() - t.intValue() < 0) {
             r.rightNode = add(r.rightNode, t);
         }
         return r;
     }
+
     // in-order
     public void inOrder() {
         inOrder(root);
@@ -60,9 +84,9 @@ public class BinarySearchTree<T extends Comparable<T>> {
         if (r == null) {
             return null;
         }
-        if (x.compareTo(r.data) < 0) {
+        if (x.intValue() - r.data.intValue() < 0) {
             r.leftNode = remove(r.leftNode, x);
-        } else if (x.compareTo(r.data) > 0) {
+        } else if (x.intValue() - r.data.intValue() > 0) {
             r.rightNode = remove(r.rightNode, x);
         } else {
             if (r.leftNode == null) {
@@ -82,24 +106,5 @@ public class BinarySearchTree<T extends Comparable<T>> {
             r = r.leftNode;
         }
         return r.data;
-    }
-
-    // tìm kiếm node có giá trị x
-    public boolean search(T x) {
-        return search(root, x);
-    }
-
-    private boolean search(Node<T> r, T x) {
-        if (r == null) {
-            return false;
-        }
-        if (r.data.compareTo(x) == 0) {
-            return true;
-        } else if (r.data.compareTo(x) > 0) {
-            return search(r.leftNode, x);
-        } else if (r.data.compareTo(x) < 0) {
-            return search(r.rightNode, x);
-        }
-        return false;
     }
 }
