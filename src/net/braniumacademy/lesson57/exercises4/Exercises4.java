@@ -1,10 +1,10 @@
-package net.braniumacademy.lesson57.exercises2;
+package net.braniumacademy.lesson57.exercises4;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Exercises2 {
+public class Exercises4 {
     public static void main(String[] args) {
         var input = new Scanner(System.in);
         System.out.println("Nhập tên file đầu vào: ");
@@ -14,7 +14,7 @@ public class Exercises2 {
         if (!tree.isEmpty()) { // nếu cây không rỗng
             System.out.println("Trước khi xóa: ");
             tree.inOrder();
-            var numberOfRemovedNode = tree.removeLeafNodes();
+            var numberOfRemovedNode = tree.removeOneChildNodes();
             System.out.println("\nSố node đã bị xóa: " + numberOfRemovedNode);
             System.out.println("Sau khi xóa: ");
             tree.inOrder();

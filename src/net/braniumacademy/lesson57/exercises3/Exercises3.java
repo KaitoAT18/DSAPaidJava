@@ -15,7 +15,7 @@ public class Exercises3 {
             System.out.println("Trước khi xóa: ");
             tree.inOrder();
             var numberOfRemovedNode = tree.removeEvenNodes();
-            System.out.println("\nSố node lá đã bị xóa: " + numberOfRemovedNode);
+            System.out.println("\nSố node đã bị xóa: " + numberOfRemovedNode);
             System.out.println("Sau khi xóa: ");
             tree.inOrder();
         }

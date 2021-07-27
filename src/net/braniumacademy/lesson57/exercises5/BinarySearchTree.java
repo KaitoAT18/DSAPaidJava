@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson57.exercises3;
+package net.braniumacademy.lesson57.exercises5;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,24 +6,24 @@ import java.util.List;
 public class BinarySearchTree<T extends Number> {
     private Node<T> root;
 
-    public int removeEvenNodes() {
+    public int removeNodes() {
         List<T> targetNodes = new ArrayList<>();
-        findEvenNodes(root, targetNodes);
+        findNodeWithLeftChildOnly(root, targetNodes);
         for (var e : targetNodes) {
             remove(e);
         }
         return targetNodes.size();
     }
 
-    private void findEvenNodes(Node<T> r, List<T> targetNodes) {
+    private void findNodeWithLeftChildOnly(Node<T> r, List<T> targetNodes) {
         if (r == null) {
             return; // end game
         }
-        if (r.data.intValue() % 2 == 0) {
+        if (r.leftNode != null && r.rightNode == null) {
             targetNodes.add(r.data);
         }
-        findEvenNodes(r.leftNode, targetNodes);
-        findEvenNodes(r.rightNode, targetNodes);
+        findNodeWithLeftChildOnly(r.leftNode, targetNodes);
+        findNodeWithLeftChildOnly(r.rightNode, targetNodes);
     }
 
     static class Node<T extends Number> {
