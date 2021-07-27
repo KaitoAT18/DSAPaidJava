@@ -1,10 +1,10 @@
-package net.braniumacademy.lesson57.exercises1;
+package net.braniumacademy.lesson57.exercises2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Exercises1 {
+public class Exercises2 {
     public static void main(String[] args) {
         var input = new Scanner(System.in);
         System.out.println("Nhập tên file đầu vào: ");
@@ -12,17 +12,12 @@ public class Exercises1 {
         BinarySearchTree<Integer> tree = new BinarySearchTree<>();
         readInputFile(tree, fileName);
         if (!tree.isEmpty()) { // nếu cây không rỗng
-            System.out.println("Nhập x cầ xóa: ");
-            int x = input.nextInt();
-            if (tree.search(x)) {
-                System.out.println("Trước khi xóa: ");
-                tree.inOrder();
-                tree.remove(x);
-                System.out.println("\nSau khi xóa: ");
-                tree.inOrder();
-            } else {
-                System.out.println("Giá trị cần xóa không tồn tại.");
-            }
+            System.out.println("Trước khi xóa: ");
+            tree.inOrder();
+            var numberOfRemovedNode = tree.removeLeafNodes();
+            System.out.println("\nSố node lá đã bị xóa: " + numberOfRemovedNode);
+            System.out.println("\nSau khi xóa: ");
+            tree.inOrder();
         }
     }
 

@@ -1,7 +1,30 @@
-package net.braniumacademy.lesson57.exercises1;
+package net.braniumacademy.lesson57.exercises2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> root;
+
+    public int removeLeafNodes() {
+        List<T> leafNodes = new ArrayList<>();
+        findLeafNodes(root, leafNodes);
+        for (var e : leafNodes) {
+            remove(e);
+        }
+        return leafNodes.size();
+    }
+
+    private void findLeafNodes(Node<T> r, List<T> leafNodes) {
+        if (r == null) {
+            return; // end game
+        }
+        if (r.leftNode == null && r.rightNode == null) {
+            leafNodes.add(r.data);
+        }
+        findLeafNodes(r.leftNode, leafNodes);
+        findLeafNodes(r.rightNode, leafNodes);
+    }
 
     static class Node<T> {
         private Node<T> leftNode;
@@ -38,6 +61,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         return r;
     }
+
     // in-order
     public void inOrder() {
         inOrder(root);
@@ -82,24 +106,5 @@ public class BinarySearchTree<T extends Comparable<T>> {
             r = r.leftNode;
         }
         return r.data;
-    }
-
-    // tìm kiếm node có giá trị x
-    public boolean search(T x) {
-        return search(root, x);
-    }
-
-    private boolean search(Node<T> r, T x) {
-        if (r == null) {
-            return false;
-        }
-        if (r.data.compareTo(x) == 0) {
-            return true;
-        } else if (r.data.compareTo(x) > 0) {
-            return search(r.leftNode, x);
-        } else if (r.data.compareTo(x) < 0) {
-            return search(r.rightNode, x);
-        }
-        return false;
     }
 }
