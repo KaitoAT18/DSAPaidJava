@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * @author Branium Academy
+ * @version 2021.07
+ * @website https://braniumacademy.net/
+ */
+
 public class Exercises6 {
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
