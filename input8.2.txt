@@ -1,0 +1,13 @@
+12
+NV001 Tran Van Nam 15200
+NV002 Le Van Nam 15200
+NV011 Ngo Van Nam 15200
+NV012 Mai Van Nam 15200
+NV003 Hoang Thanh Thuy 16520
+NV004 Nguyen Thanh Long 17850
+NV005 Truong Ngo Gia Bao 19580
+NV006 Le Nguyen Hung Cuong 14500
+NV007 Hoang Le Nguyen Vu 20500
+NV008 Khuc Duy Hai 16320
+NV009 Lai The Tam 13540
+NV010 Tony Nguyen Hoang Trang 17800
