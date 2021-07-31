@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson82;
+package net.braniumacademy.lesson810;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,34 +13,35 @@ import java.util.Scanner;
  * @website https://braniumacademy.net/
  */
 
-public class Exercises6 {
+public class Exercises8 {
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
         getDataFromFile(employees);
-        Employee[] employeesArr = new Employee[employees.size()];
+        Object[] employeesArr = new Employee[employees.size()];
         employees.toArray(employeesArr);
-        Arrays.sort(employeesArr);
+        Arrays.sort(employeesArr); // sắp xếp giảm dần theo lương
         showResult(employeesArr);
     }
 
-    private static void showResult(Employee[] employeesArr) {
+    private static void showResult(Object[] employeesArr) {
         System.out.printf("%-15s%-15s%-20s%-15s%-20s\n", "Mã NV", "Họ", "Đệm", "Tên", "Lương");
-        for (var e : employeesArr) {
+        for (var obj : employeesArr) {
+            var e = (Employee) obj;
             System.out.printf("%-15s%-15s%-20s%-15s%-20.2f\n",
                     e.getId(), e.getLastName(), e.getMidName(), e.getFirstName(), e.getSalary());
         }
     }
 
-    public static <T extends Comparable<T>> void bubbleSort(T[] arr) {
+    public static <T extends Comparable<T>> void insertionSort(T[] arr) {
         int n = arr.length;
-        for (int i = 0; i <= n - 2; i++) {
-            for (int j = n - 1; j >= i + 1; j--) {
-                if (arr[j - 1].compareTo(arr[j]) > 0) {
-                    T tmp = arr[j - 1];
-                    arr[j - 1] = arr[j];
-                    arr[j] = tmp;
-                }
+        for (int i = 1; i < n; i++) {
+            T target = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j].compareTo(target) > 0) {
+                arr[j + 1] = arr[j];
+                j--;
             }
+            arr[j + 1] = target;
         }
     }
 
@@ -135,6 +136,7 @@ class Employee implements Comparable<Employee> {
      * Thuật toán xác định việc sắp xếp. Giảm dần theo lương thì xét (other-this).
      * Sắp xếp tăng dần thì xét (this-other). Thuật toán thực hiện đổi chỗ cặp
      * phần tử nếu kết quả trả về dương.
+     *
      * @param other là một đối tượng nhân viên khác cần so sánh
      * @return giá trị âm, dương hoặc bằng 0 tương ứng
      */
