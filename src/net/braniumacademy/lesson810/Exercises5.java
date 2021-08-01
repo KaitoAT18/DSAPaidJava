@@ -35,8 +35,8 @@ public class Exercises5 {
         }
     }
 
-    private static <T> void printResult(T[] words) {
-        for (var e : words) {
+    private static <T> void printResult(T[] numbers) {
+        for (var e : numbers) {
             System.out.print(e + " ");
         }
         System.out.println();
