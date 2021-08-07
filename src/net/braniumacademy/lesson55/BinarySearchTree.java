@@ -67,6 +67,4 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
         return false; // mặc định không tìm thấy x
     }
-
-
 }
