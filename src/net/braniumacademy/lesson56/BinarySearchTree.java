@@ -1,5 +1,7 @@
 package net.braniumacademy.lesson56;
 
+import javax.management.NotificationEmitter;
+
 public class BinarySearchTree<T extends Comparable<T>> {
     private Node<T> root;
 
@@ -23,6 +25,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return 1 + countBranchNodes(r.leftNode) + countBranchNodes(r.rightNode);
     }
 
+    // liệt kê các node cành, node cành có thể có 1 hoặc 2 cây con
+    public void listBranchNodes() {
+        listBranchNodes(root);
+    }
+
+    private void listBranchNodes(Node<T> r) {
+        if (r != null) {
+            listBranchNodes(r.leftNode);
+            if (!(r.leftNode == null && r.rightNode == null)) {
+                System.out.println(r.data);
+            }
+            listBranchNodes(r.rightNode);
+        }
+    }
+
     /**
      * Phương thức đếm số node cành có 2 cây con.
      * Node cành có 2 cây con là node có cả hai cây con trái và phải.
@@ -41,6 +58,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return 1 + countTwoSubtreeNodes(r.leftNode) + countTwoSubtreeNodes(r.rightNode);
         } else {
             return countTwoSubtreeNodes(r.leftNode) + countTwoSubtreeNodes(r.rightNode);
+        }
+    }
+
+    // Liệt kê các node cành có 2 cây con
+    public void listNodeHave2Children() {
+        listNodeHave2Children(root);
+    }
+
+    private void listNodeHave2Children(Node<T> r) {
+        if (r != null) {
+            listNodeHave2Children(r.leftNode);
+            if (r.leftNode != null && r.rightNode != null) {
+                System.out.println(r.data);
+            }
+            listNodeHave2Children(r.rightNode);
         }
     }
 
@@ -102,6 +134,52 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return levelOfNode(r.leftNode, x, level + 1);
         } else {
             return levelOfNode(r.rightNode, x, level + 1);
+        }
+    }
+
+    // liệt kê các node chỉ có 1 cây con trái hoặc phải
+    public void listNodeHaveOnly1Child() {
+        listNodeHaveOnly1Child(root);
+    }
+
+    private void listNodeHaveOnly1Child(Node<T> r) {
+        if (r != null) {
+            listNodeHaveOnly1Child(r.leftNode);
+            if ((r.leftNode == null && r.rightNode != null) ||
+                    (r.leftNode != null && r.rightNode == null)) {
+                System.out.println(r.data);
+            }
+            listNodeHaveOnly1Child(r.rightNode);
+        }
+    }
+
+    // liệt kê các node chỉ có cây con trái
+    public void listNodeHaveOnlyLeftChild() {
+        listNodeHaveOnlyLeftChild(root);
+    }
+
+    private void listNodeHaveOnlyLeftChild(Node<T> r) {
+        if (r != null) {
+            listNodeHaveOnlyLeftChild(r.leftNode);
+            if (r.leftNode != null && r.rightNode == null) {
+                System.out.println(r.data);
+            }
+            listNodeHaveOnlyLeftChild(r.rightNode);
+        }
+    }
+
+    // liệt kê các node chỉ có cây con trái
+    public void listNodeHaveOnlyRightChild() {
+        listNodeHaveOnlyRightChild(root);
+    }
+
+    private void listNodeHaveOnlyRightChild(Node<T> r) {
+        if (r != null) {
+            listNodeHaveOnlyRightChild(r.leftNode);
+            if (r.leftNode == null && r.rightNode != null) {
+                System.out.println(r.data);
+            }
+            listNodeHaveOnlyRightChild(r.rightNode);
         }
     }
 
@@ -220,5 +298,20 @@ public class BinarySearchTree<T extends Comparable<T>> {
             return 1;
         }
         return countLeafNodes(r.leftNode) + countLeafNodes(r.rightNode);
+    }
+
+    // liệt kê các node lá
+    public void listLeafNodes() {
+        showLeafNodes(root);
+    }
+
+    private void showLeafNodes(Node<T> r) {
+        if (r != null) {
+            showLeafNodes(r.leftNode);
+            if (r.leftNode == null && r.rightNode == null) {
+                System.out.println(r.data);
+            }
+            showLeafNodes(r.rightNode);
+        }
     }
 }
