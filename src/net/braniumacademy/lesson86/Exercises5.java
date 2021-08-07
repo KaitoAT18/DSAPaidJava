@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @website https://braniumacademy.net/
  */
 
-public class Exercises6 {
+public class Exercises5 {
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
         getDataFromFile(employees);
