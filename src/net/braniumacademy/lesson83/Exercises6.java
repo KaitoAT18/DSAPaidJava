@@ -46,7 +46,7 @@ public class Exercises6 {
     }
 
     private static void getDataFromFile(List<Employee> employees) {
-        try (Scanner input = new Scanner(new File("input8.2.txt"))) {
+        try (Scanner input = new Scanner(new File("INPUT.DAT"))) {
             var t = Integer.parseInt(input.nextLine());
             while (t > 0) {
                 String line = input.nextLine();
