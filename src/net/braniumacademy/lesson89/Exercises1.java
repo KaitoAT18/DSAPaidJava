@@ -5,7 +5,7 @@ import java.util.Scanner;
 /**
  * @author Branium Academy
  * @version 2021.08
- * @website https://braniumacademy.net/
+ * @see  <a href="https://braniumacademy.net/">...</a>
  */
 
 public class Exercises1 {
