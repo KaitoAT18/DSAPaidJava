@@ -8,7 +8,7 @@ package net.braniumacademy.lesson65.exercises1;
 
 import java.util.Scanner;
 
-public class Exercises5 {
+public class Exercises1 {
     public static void main(String[] args) {
         PriorityQueue<String> queue = new PriorityQueue<>(100);
         Scanner input = new Scanner(System.in);

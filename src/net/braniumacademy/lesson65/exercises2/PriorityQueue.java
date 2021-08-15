@@ -62,7 +62,7 @@ public class PriorityQueue<E extends Comparable<E>> {
 
     public void siftUp(int index) {
         var parentIndex = (index - 1) / 2;
-        if (data[index].getPriority() > data[parentIndex].getPriority()) {
+        if (data[index].getPriority() < data[parentIndex].getPriority()) {
             Node<E> tmp = data[index];
             data[index] = data[parentIndex];
             data[parentIndex] = tmp;
@@ -75,11 +75,11 @@ public class PriorityQueue<E extends Comparable<E>> {
         var left = 2 * index + 1;
         var right = 2 * index + 2;
         if (left < currentSize &&
-                data[left].getPriority() > data[largest].getPriority()) {
+                data[left].getPriority() < data[largest].getPriority()) {
             largest = left;
         }
         if (right < currentSize &&
-                data[right].getPriority() > data[largest].getPriority()) {
+                data[right].getPriority() < data[largest].getPriority()) {
             largest = right;
         }
         if (largest != index) {
@@ -122,8 +122,7 @@ public class PriorityQueue<E extends Comparable<E>> {
 
     public void showElements() {
         for (int i = 0; i < currentSize; i++) {
-            System.out.print(data[i].getValue() + "(" + data[i].getPriority() + ") ");
+            System.out.println(data[i].getValue() + "(" + data[i].getPriority() + ") ");
         }
-        System.out.println();
     }
 }

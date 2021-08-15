@@ -6,26 +6,24 @@ package net.braniumacademy.lesson65.exercises2;
  * @see <a href="https://braniumacademy.net/">Branium Academy</a>
  */
 
-import net.braniumacademy.lesson64.exercises4.Heap;
-import net.braniumacademy.lesson64.exercises4.Student;
-
 import java.util.Scanner;
 
 public class Exercises2 {
     public static void main(String[] args) {
-        Heap<net.braniumacademy.lesson64.exercises4.Student> heap = new Heap(100);
+        PriorityQueue<Student> queue = new PriorityQueue<>(100);
         Scanner input = new Scanner(System.in);
         int choice;
         do {
             System.out.println("=================== MENU ===================");
-            System.out.println("1. Thêm mới 1 phần tử.");
-            System.out.println("2. Hiển thị các phần tử trong heap.");
-            System.out.println("3. Tìm xem node có giá trị x có tồn tại không.");
-            System.out.println("4. Cập nhật sinh viên theo mã.");
-            System.out.println("5. Xóa node có giá trị x khỏi heap.");
-            System.out.println("6. Cho biết phần tử nhỏ nhất trong heap.");
-            System.out.println("7. Cho biết kích thước của heap hiện thời.");
-            System.out.println("8. Thoát chương trình.");
+            System.out.println("1. Thêm mới 1 sinh viên vào hàng đợi.");
+            System.out.println("2. Hiển thị các phần tử trong hàng đợi.");
+            System.out.println("3. Tìm sinh viên theo mã.");
+            System.out.println("4. Peek node đầu hàng đợi.");
+            System.out.println("5. Pop node đầu hàng đợi.");
+            System.out.println("6. Kiểm tra xem hàng đợi có rỗng không.");
+            System.out.println("7. Kiểm tra xem hàng đợi đã đầy chưa.");
+            System.out.println("8. Cho biết kích thước hiện thời của queue.");
+            System.out.println("9. Thoát chương trình.");
             choice = input.nextInt();
             input.nextLine();
             switch (choice) {
@@ -40,71 +38,67 @@ public class Exercises2 {
                     var first = input.nextLine();
                     System.out.println("Điểm TB: ");
                     var gpa = Float.parseFloat(input.nextLine());
-                    heap.add(new net.braniumacademy.lesson64.exercises4.Student(id, first, last, mid, gpa));
+                    System.out.println("Thứ tự ưu tiên: ");
+                    var priority = Integer.parseInt(input.nextLine());
+                    queue.add(new Student(id, first, last, mid, gpa), priority);
                     break;
                 case 2:
-                    System.out.println("Các phần tử trong heap: ");
-                    heap.showElements();
+                    if(queue.isEmpty()) {
+                        System.err.println("Hàng đợi rỗng.");
+                    } else {
+                        System.out.println("Các phần tử trong hàng đợi: ");
+                        queue.showElements();
+                    }
                     break;
                 case 3:
-                    System.out.println("Nhập mã sinh viên: ");
-                    id = input.nextLine();
-                    var student = new net.braniumacademy.lesson64.exercises4.Student(id);
-                    int findXIndex = heap.findNode(student);
-                    if (findXIndex != -1) {
-                        System.out.printf("Sinh viên mã \"%s\" tồn tại trong heap.\n", student.getId());
+                    if(queue.isEmpty()) {
+                        System.err.println("Hàng đợi rỗng.");
                     } else {
-                        System.out.printf("Sinh viên mã \"%s\" không tồn tại trong heap.\n", student.getId());
+                        System.out.println("Nhập mã sinh viên: ");
+                        id = input.nextLine();
+                        var student = new Student(id);
+                        int findXIndex = queue.search(student);
+                        if (findXIndex != -1) {
+                            System.out.printf("Sinh viên mã \"%s\" tồn tại trong hàng đợi.\n", student.getId());
+                        } else {
+                            System.out.printf("Sinh viên mã \"%s\" không tồn tại trong hàng đợi.\n", student.getId());
+                        }
                     }
                     break;
                 case 4:
-                    System.out.println("Nhập mã sinh viên: ");
-                    id = input.nextLine();
-                    var oldStudent = new net.braniumacademy.lesson64.exercises4.Student(id);
-                    System.out.println("===== Nhập thông tin mới =====");
-                    System.out.println("Họ: ");
-                    first = input.nextLine();
-                    System.out.println("Đệm: ");
-                    last = input.nextLine();
-                    System.out.println("Tên: ");
-                    mid = input.nextLine();
-                    System.out.println("Điểm TB: ");
-                    gpa = Float.parseFloat(input.nextLine());
-                    var newStudent = new net.braniumacademy.lesson64.exercises4.Student(id, first, last, mid, gpa);
-                    if (heap.update(oldStudent, newStudent)) {
-                        System.out.println("Cập nhật thành công.");
+                    var peekNode = queue.peek();
+                    if (peekNode != null) {
+                        System.out.printf("Phần đầu hàng đợi: %s(%d)\n",
+                                peekNode.getValue(), peekNode.getPriority());
                     } else {
-                        System.out.println("Cập nhật thất bại.");
+                        System.err.println("Hàng đợi rỗng.");
                     }
                     break;
                 case 5:
-                    System.out.println("Nhập mã sinh viên: ");
-                    id = input.nextLine();
-                    student = new Student(id);
-                    boolean removeX = heap.remove(student);
-                    if (removeX) {
-                        System.out.println("Xóa thành công!");
+                    var removedNode = queue.pop();
+                    if (removedNode != null) {
+                        System.out.printf("Phần đã bị xóa bỏ: %s(%d)\n",
+                                removedNode.getValue(), removedNode.getPriority());
                     } else {
-                        System.out.println("Xóa thất bại!");
+                        System.err.println("Hàng đợi rỗng.");
                     }
                     break;
                 case 6:
-                    try {
-                        System.out.println("Sinh viên có mã nhỏ nhất: " + heap.min());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                    System.out.println("Hàng đợi rỗng? " + queue.isEmpty());
                     break;
                 case 7:
-                    System.out.println("Kích thước của heap: " + heap.size());
+                    System.out.println("Hàng đợi đầy? " + queue.isFull());
                     break;
                 case 8:
+                    System.out.println("Kích thước của hàng đợi: " + queue.size());
+                    break;
+                case 9:
                     System.out.println("Chương trình kết thúc.");
                     break;
                 default:
-                    System.out.println("Sai chức năng. Vui lòng chọn lại.");
+                    System.err.println("Sai chức năng. Vui lòng chọn lại.");
                     break;
             }
-        } while (choice != 8);
+        } while (choice != 9);
     }
 }
