@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson64.exercises4;
+package net.braniumacademy.lesson65.exercises2;
 
 /**
  * @author Branium Academy

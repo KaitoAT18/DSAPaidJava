@@ -1,6 +1,10 @@
 package net.braniumacademy.lesson62.exercises2;
 
-import java.lang.reflect.Array;
+/**
+ * @author Branium Academy
+ * @version 2021.08
+ * @see <a href="https://braniumacademy.net/">Branium Academy</a>
+ */
 
 public class Heap {
     private int[] data;

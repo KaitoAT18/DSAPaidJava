@@ -2,6 +2,12 @@ package net.braniumacademy.lesson63.exercises3;
 
 import java.lang.reflect.Array;
 
+/**
+ * @author Branium Academy
+ * @version 2021.08
+ * @see <a href="https://braniumacademy.net/">Branium Academy</a>
+ */
+
 public class Heap<E extends Comparable<E>> {
     private E[] data;
     private final int MAX_SIZE;

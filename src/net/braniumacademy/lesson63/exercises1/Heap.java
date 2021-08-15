@@ -1,5 +1,11 @@
 package net.braniumacademy.lesson63.exercises1;
 
+/**
+ * @author Branium Academy
+ * @version 2021.08
+ * @see <a href="https://braniumacademy.net/">Branium Academy</a>
+ */
+
 import java.lang.reflect.Array;
 
 public class Heap<E extends Comparable<E>> {

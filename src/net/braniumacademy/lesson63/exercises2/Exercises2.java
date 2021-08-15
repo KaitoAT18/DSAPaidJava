@@ -1,5 +1,11 @@
 package net.braniumacademy.lesson63.exercises2;
 
+/**
+ * @author Branium Academy
+ * @version 2021.08
+ * @see <a href="https://braniumacademy.net/">Branium Academy</a>
+ */
+
 import java.util.Scanner;
 
 public class Exercises2 {

@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson63.exercises5;
+package net.braniumacademy.lesson65.exercises1;
 
 /**
  * @author Branium Academy
@@ -16,11 +16,14 @@ public class Exercises5 {
         do {
             System.out.println("=================== MENU ===================");
             System.out.println("1. Thêm mới 1 phần tử.");
-            System.out.println("2. Peek node đầu queue.");
-            System.out.println("3. Pop node đầu queue.");
-            System.out.println("4. Hiển thị các phần tử trong queue.");
-            System.out.println("5. Tìm xem sinh viên x có tồn tại trong queue.");
-            System.out.println("6. Thoát chương trình.");
+            System.out.println("2. Hiển thị các phần tử trong queue.");
+            System.out.println("3. Tìm node có giá trị x.");
+            System.out.println("4. Peek node đầu queue.");
+            System.out.println("5. Pop node đầu queue.");
+            System.out.println("6. Kiểm tra xem hàng đợi có rỗng không.");
+            System.out.println("7. Kiểm tra xem hàng đợi đã đầy chưa.");
+            System.out.println("8. Cho biết kích thước hiện thời của queue.");
+            System.out.println("9. Thoát chương trình.");
             choice = input.nextInt();
             switch (choice) {
                 case 1:
@@ -30,29 +33,10 @@ public class Exercises5 {
                     queue.add(element, priority);
                     break;
                 case 2:
-                    var peekNode = queue.peek();
-                    if (peekNode != null) {
-                        System.out.printf("Phần đầu hàng đợi: %s(%d)\n",
-                                peekNode.getValue(), peekNode.getPriority());
-                    } else {
-                        System.out.println("Hàng đợi rỗng.");
-                    }
-                    break;
-                case 3:
-                    var removedNode = queue.pop();
-                    if (removedNode != null) {
-                        System.out.printf("Phần đã bị xóa bỏ: %s(%d)\n",
-                                removedNode.getValue(), removedNode.getPriority());
-                    } else {
-                        System.out.println("Hàng đợi rỗng.");
-                    }
-
-                    break;
-                case 4:
                     System.out.println("Các phần tử trong queue: ");
                     queue.showElements();
                     break;
-                case 5:
+                case 3:
                     System.out.println("Nhập giá trị cần tìm: ");
                     var key = input.next();
                     var resultIndex = queue.search(key);
@@ -62,13 +46,40 @@ public class Exercises5 {
                         System.out.println("Giá trị cần tìm tồn tại trong queue.");
                     }
                     break;
+                case 4:
+                    var peekNode = queue.peek();
+                    if (peekNode != null) {
+                        System.out.printf("Phần đầu hàng đợi: %s(%d)\n",
+                                peekNode.getValue(), peekNode.getPriority());
+                    } else {
+                        System.out.println("Hàng đợi rỗng.");
+                    }
+                    break;
+                case 5:
+                    var removedNode = queue.pop();
+                    if (removedNode != null) {
+                        System.out.printf("Phần đã bị xóa bỏ: %s(%d)\n",
+                                removedNode.getValue(), removedNode.getPriority());
+                    } else {
+                        System.out.println("Hàng đợi rỗng.");
+                    }
+                    break;
                 case 6:
+                    System.out.println("Hàng đợi rỗng? " + queue.isEmpty());
+                    break;
+                case 7:
+                    System.out.println("Hàng đợi đầy? " + queue.isFull());
+                    break;
+                case 8:
+                    System.out.println("Kích thước hiện tại? " + queue.size());
+                    break;
+                case 9:
                     System.out.println("Chương trình kết thúc.");
                     break;
                 default:
                     System.out.println("Sai chức năng. Vui lòng chọn lại.");
                     break;
             }
-        } while (choice != 6);
+        } while (choice != 9);
     }
 }

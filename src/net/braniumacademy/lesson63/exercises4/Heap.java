@@ -1,5 +1,11 @@
 package net.braniumacademy.lesson63.exercises4;
 
+/**
+ * @author Branium Academy
+ * @version 2021.08
+ * @see <a href="https://braniumacademy.net/">Branium Academy</a>
+ */
+
 public class Heap<E extends Student> {
     private Student[] data;
     private final int MAX_SIZE;

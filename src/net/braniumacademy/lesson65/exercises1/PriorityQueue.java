@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson63.exercises5;
+package net.braniumacademy.lesson65.exercises1;
 
 /**
  * @author Branium Academy
@@ -98,17 +98,6 @@ public class PriorityQueue<E extends Comparable<E>> {
         }
     }
 
-    public int search(E e) {
-        if (currentSize > 0) {
-            for (int i = 0; i < currentSize; i++) {
-                if (data[i].getValue().compareTo(e) == 0) {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-
     public Node<E> pop() {
         if (!isEmpty()) {
             Node<E> removedNode = data[0];
@@ -120,6 +109,15 @@ public class PriorityQueue<E extends Comparable<E>> {
         } else {
             return null;
         }
+    }
+
+    public int search(E e) {
+        for (int i = 0; i < currentSize; i++) {
+            if (data[i].getValue().compareTo(e) == 0) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void showElements() {
