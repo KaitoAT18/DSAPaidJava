@@ -33,11 +33,7 @@ public class Exercises2 {
                     }
                     break;
                 case 4:
-                    try {
-                        System.out.println("Số phần tử trong heap: " + heap.size());
-                    } catch (Exception e) {
-                        System.err.println(e.getMessage());
-                    }
+                    System.out.println("Số phần tử trong heap: " + heap.size());
                     break;
                 case 5:
                     System.out.println("Chương trình kết thúc.");

@@ -52,14 +52,6 @@ public class Heap {
             return data[0];
         }
     }
-    // trả vể giá trị nhỏ nhất trong heap
-    public int min() throws Exception {
-        if (currentSize == 0) {
-            throw new Exception("Heap rỗng.");
-        } else {
-            return data[currentSize - 1];
-        }
-    }
     // trả về kích thước của heap
     public int size() {
         return currentSize;

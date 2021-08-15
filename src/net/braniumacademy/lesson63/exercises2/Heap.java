@@ -1,20 +1,18 @@
-package net.braniumacademy.lesson63.exercises1;
+package net.braniumacademy.lesson63.exercises2;
 
-import java.lang.reflect.Array;
-
-public class Heap<E extends Comparable<E>> {
-    private E[] data;
+public class Heap {
+    private int[] data;
     private final int MAX_SIZE;
     private int currentSize;
 
-    public Heap(Class<E> dataType, int size) {
+    public Heap(int size) {
         MAX_SIZE = size;
         currentSize = 0;
-        data = (E[]) Array.newInstance(dataType, MAX_SIZE);
+        data = new int[MAX_SIZE];
     }
 
     // thêm phần tử mới vào heap
-    public boolean add(E e) {
+    public boolean add(int e) {
         currentSize++;
         if (currentSize <= MAX_SIZE) {
             data[currentSize - 1] = e;
@@ -28,8 +26,8 @@ public class Heap<E extends Comparable<E>> {
     // sàng lên để tái cân bằng heap
     public void siftUp(int index) {
         var parentIndex = (index - 1) / 2;
-        if (data[index].compareTo(data[parentIndex]) > 0) {
-            E tmp = data[index];
+        if (data[index] > data[parentIndex]) {
+            int tmp = data[index];
             data[index] = data[parentIndex];
             data[parentIndex] = tmp;
             siftUp(parentIndex);
@@ -49,9 +47,9 @@ public class Heap<E extends Comparable<E>> {
     }
 
     // trả về giá trị lớn nhất trong heap
-    public E max() {
+    public int max() throws Exception {
         if (currentSize == 0) {
-            return null;
+            throw new Exception("Heap rỗng.");
         } else {
             return data[0];
         }
@@ -61,11 +59,11 @@ public class Heap<E extends Comparable<E>> {
         return currentSize;
     }
 
-    public boolean remove(E e) {
+
+    public boolean remove(int e) {
         var index = findNode(e);
         if (index >= 0) {
             data[index] = data[currentSize - 1];
-            data[currentSize - 1] = null;
             currentSize--;
             siftDown(index);
             return true; // xóa thành công
@@ -78,23 +76,23 @@ public class Heap<E extends Comparable<E>> {
         var largest = index;
         var left = 2 * index + 1;
         var right = 2 * index + 2;
-        if (left < currentSize && data[left].compareTo(data[largest]) > 0) {
+        if (left < currentSize && data[left] > data[largest]) {
             largest = left;
         }
-        if (right < currentSize && data[right].compareTo(data[largest]) > 0) {
+        if (right < currentSize && data[right] > data[largest]) {
             largest = right;
         }
         if (largest != index) {
-            E tmp = data[index];
+            int tmp = data[index];
             data[index] = data[largest];
             data[largest] = tmp;
             siftDown(largest);
         }
     }
 
-    public int findNode(E e) {
+    public int findNode(int e) {
         for (int i = 0; i < currentSize; i++) {
-            if (data[i].compareTo(e) == 0) {
+            if (data[i]== e) {
                 return i;
             }
         }

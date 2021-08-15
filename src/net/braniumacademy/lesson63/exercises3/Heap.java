@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson63.exercises1;
+package net.braniumacademy.lesson63.exercises3;
 
 import java.lang.reflect.Array;
 
@@ -28,7 +28,7 @@ public class Heap<E extends Comparable<E>> {
     // sàng lên để tái cân bằng heap
     public void siftUp(int index) {
         var parentIndex = (index - 1) / 2;
-        if (data[index].compareTo(data[parentIndex]) > 0) {
+        if (data[index].compareTo(data[parentIndex]) < 0) {
             E tmp = data[index];
             data[index] = data[parentIndex];
             data[parentIndex] = tmp;
@@ -49,7 +49,7 @@ public class Heap<E extends Comparable<E>> {
     }
 
     // trả về giá trị lớn nhất trong heap
-    public E max() {
+    public E min() {
         if (currentSize == 0) {
             return null;
         } else {
@@ -78,10 +78,10 @@ public class Heap<E extends Comparable<E>> {
         var largest = index;
         var left = 2 * index + 1;
         var right = 2 * index + 2;
-        if (left < currentSize && data[left].compareTo(data[largest]) > 0) {
+        if (left < currentSize && data[left].compareTo(data[largest]) < 0) {
             largest = left;
         }
-        if (right < currentSize && data[right].compareTo(data[largest]) > 0) {
+        if (right < currentSize && data[right].compareTo(data[largest]) < 0) {
             largest = right;
         }
         if (largest != index) {
