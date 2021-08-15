@@ -34,7 +34,7 @@ public class Exercises2 {
                     break;
                 case 4:
                     try {
-                        System.out.println("Phần tử nhỏ nhất: " + heap.min());
+                        System.out.println("Số phần tử trong heap: " + heap.size());
                     } catch (Exception e) {
                         System.err.println(e.getMessage());
                     }

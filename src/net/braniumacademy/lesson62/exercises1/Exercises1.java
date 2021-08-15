@@ -29,7 +29,7 @@ public class Exercises1 {
                     System.out.println("Phần tử lớn nhất: " + heap.max());
                     break;
                 case 4:
-                    System.out.println("Phần tử nhỏ nhất: " + heap.min());
+                    System.out.println("Số phần tử trong heap: " + heap.size());
                     break;
                 case 5:
                     System.out.println("Chương trình kết thúc.");

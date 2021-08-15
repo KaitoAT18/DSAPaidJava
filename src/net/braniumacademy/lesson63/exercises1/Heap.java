@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson62.exercises3;
+package net.braniumacademy.lesson63.exercises1;
 
 import java.lang.reflect.Array;
 
@@ -12,6 +12,7 @@ public class Heap<E extends Comparable<E>> {
         currentSize = 0;
         data = (E[]) Array.newInstance(dataType, MAX_SIZE);
     }
+
     // thêm phần tử mới vào heap
     public boolean add(E e) {
         currentSize++;
@@ -23,19 +24,21 @@ public class Heap<E extends Comparable<E>> {
             return false; // thêm thất bại
         }
     }
+
     // sàng lên để tái cân bằng heap
     public void siftUp(int index) {
         var parentIndex = (index - 1) / 2;
-        if (data[index].compareTo(data[parentIndex]) < 0) {
+        if (data[index].compareTo(data[parentIndex]) > 0) {
             E tmp = data[index];
             data[index] = data[parentIndex];
             data[parentIndex] = tmp;
             siftUp(parentIndex);
         }
     }
+
     // hiển thị các phần tử hiện có của heap
     public void showElements() {
-        if(currentSize == 0) {
+        if (currentSize == 0) {
             System.err.println("Heap rỗng.");
         } else {
             for (int i = 0; i < currentSize; i++) {
@@ -44,24 +47,66 @@ public class Heap<E extends Comparable<E>> {
             System.out.println();
         }
     }
+
     // trả về giá trị lớn nhất trong heap
     public E max() {
-        if (currentSize == 0) {
-            return null;
-        } else {
-            return data[currentSize - 1];
-        }
-    }
-    // trả vể giá trị nhỏ nhất trong heap
-    public E min() {
         if (currentSize == 0) {
             return null;
         } else {
             return data[0];
         }
     }
-    // trả về kích thước của heap
+
     public int size() {
         return currentSize;
+    }
+
+    // trả vể giá trị nhỏ nhất trong heap
+    public E min() {
+        if (currentSize == 0) {
+            return null;
+        } else {
+            return data[currentSize - 1];
+        }
+    }
+
+    public boolean remove(E e) {
+        var index = findNode(e);
+        if (index >= 0) {
+            data[index] = data[currentSize - 1];
+            data[currentSize - 1] = null;
+            currentSize--;
+            siftDown(index);
+            return true; // xóa thành công
+        } else {
+            return false; // xóa thất bại
+        }
+    }
+
+    public void siftDown(int index) {
+        var largest = index;
+        var left = 2 * index + 1;
+        var right = 2 * index + 2;
+        if (left < currentSize && data[left].compareTo(data[largest]) > 0) {
+            largest = left;
+        }
+        if (right < currentSize && data[right].compareTo(data[largest]) > 0) {
+            largest = right;
+        }
+        if (largest != index) {
+            E tmp = data[index];
+            data[index] = data[largest];
+            data[largest] = tmp;
+            siftDown(largest);
+        }
+    }
+
+    public int findNode(E e) {
+        for (int i = 0; i < currentSize; i++) {
+            if (data[i].compareTo(e) == 0) {
+                return i;
+            }
+        }
+        return -1; // không tìm thấy node e trong heap
     }
 }

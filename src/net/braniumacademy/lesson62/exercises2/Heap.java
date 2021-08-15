@@ -60,4 +60,8 @@ public class Heap {
             return data[currentSize - 1];
         }
     }
+    // trả về kích thước của heap
+    public int size() {
+        return currentSize;
+    }
 }
