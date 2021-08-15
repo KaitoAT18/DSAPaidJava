@@ -1,7 +1,5 @@
 package net.braniumacademy.lesson63.exercises4;
 
-import java.lang.reflect.Array;
-
 public class Heap<E extends Student> {
     private Student[] data;
     private final int MAX_SIZE;

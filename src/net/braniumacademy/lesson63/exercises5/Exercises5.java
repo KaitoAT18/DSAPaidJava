@@ -1,8 +1,8 @@
-package net.braniumacademy.lesson62.exercises4;
+package net.braniumacademy.lesson63.exercises5;
 
 import java.util.Scanner;
 
-public class Exercises1 {
+public class Exercises5 {
     public static void main(String[] args) {
         PriorityQueue<String> queue = new PriorityQueue<>(100);
         Scanner input = new Scanner(System.in);
@@ -13,7 +13,8 @@ public class Exercises1 {
             System.out.println("2. Peek node đầu queue.");
             System.out.println("3. Pop node đầu queue.");
             System.out.println("4. Hiển thị các phần tử trong queue.");
-            System.out.println("5. Thoát chương trình.");
+            System.out.println("5. Tìm xem sinh viên x có tồn tại trong queue.");
+            System.out.println("6. Thoát chương trình.");
             choice = input.nextInt();
             switch (choice) {
                 case 1:
@@ -46,12 +47,22 @@ public class Exercises1 {
                     queue.showElements();
                     break;
                 case 5:
+                    System.out.println("Nhập giá trị cần tìm: ");
+                    var key = input.next();
+                    var resultIndex = queue.search(key);
+                    if (resultIndex < 0) {
+                        System.out.println("Giá trị cần tìm không tồn tại.");
+                    } else {
+                        System.out.println("Giá trị cần tìm tồn tại trong queue.");
+                    }
+                    break;
+                case 6:
                     System.out.println("Chương trình kết thúc.");
                     break;
                 default:
                     System.out.println("Sai chức năng. Vui lòng chọn lại.");
                     break;
             }
-        } while (choice != 5);
+        } while (choice != 6);
     }
 }
