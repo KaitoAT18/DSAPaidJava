@@ -12,10 +12,11 @@ public class Exercises2 {
             System.out.println("1. Thêm mới 1 phần tử.");
             System.out.println("2. Hiển thị các phần tử trong heap.");
             System.out.println("3. Tìm xem node có giá trị x có tồn tại không.");
-            System.out.println("4. Xóa node có giá trị x khỏi heap.");
-            System.out.println("5. Cho biết phần tử lớn nhất trong heap.");
-            System.out.println("6. Cho biết kích thước của heap hiện thời.");
-            System.out.println("7. Thoát chương trình.");
+            System.out.println("4. Cập nhật node có giá trị x.");
+            System.out.println("5. Xóa node có giá trị x khỏi heap.");
+            System.out.println("6. Cho biết phần tử lớn nhất trong heap.");
+            System.out.println("7. Cho biết kích thước của heap hiện thời.");
+            System.out.println("8. Thoát chương trình.");
             choice = input.nextInt();
             switch (choice) {
                 case 1:
@@ -38,6 +39,18 @@ public class Exercises2 {
                     }
                     break;
                 case 4:
+                    System.out.println("Nhập node cần cập nhật: ");
+                    x = input.nextInt();
+                    System.out.println("Nhập giá trị thay thế: ");
+                    var newKey = input.nextInt();
+                    var updateResult = heap.update(x, newKey);
+                    if (updateResult) {
+                        System.out.println("Cập nhật thành công");
+                    } else {
+                        System.out.println("Cập nhật thất bại.");
+                    }
+                    break;
+                case 5:
                     System.out.println("Nhập giá trị cần xóa: ");
                     x = input.nextInt();
                     boolean removeX = heap.remove(x);
@@ -47,23 +60,23 @@ public class Exercises2 {
                         System.out.println("Xóa thất bại!");
                     }
                     break;
-                case 5:
+                case 6:
                     try {
                         System.out.println("Phần tử lớn nhất: " + heap.max());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
-                case 6:
+                case 7:
                     System.out.println("Kích thước của heap: " + heap.size());
                     break;
-                case 7:
+                case 8:
                     System.out.println("Chương trình kết thúc.");
                     break;
                 default:
                     System.out.println("Sai chức năng. Vui lòng chọn lại.");
                     break;
             }
-        } while (choice != 7);
+        } while (choice != 8);
     }
 }

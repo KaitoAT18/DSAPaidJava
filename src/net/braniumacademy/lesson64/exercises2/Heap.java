@@ -92,10 +92,26 @@ public class Heap {
 
     public int findNode(int e) {
         for (int i = 0; i < currentSize; i++) {
-            if (data[i]== e) {
+            if (data[i] == e) {
                 return i;
             }
         }
         return -1; // không tìm thấy node e trong heap
+    }
+
+    // cập nhật node có giá trị x
+    public boolean update(int oldNode, int newNode) {
+        var index = findNode(oldNode); // tìm vị trí node cần update
+        if (index >= 0) {  // nếu tìm thấy
+            data[index] = newNode; // update node đó
+            var parentIndex = (index - 1) / 2; // tìm vị trí của node cha
+            if (data[parentIndex] < data[index]) {
+                siftUp(index); // nếu cha < con(index) thì sàng lên
+            } else { // ngược lại, vun xuống
+                siftDown(index);
+            }
+            return true; // cập nhật thành công
+        }
+        return false; // cập nhật thất bại
     }
 }
