@@ -1,0 +1,102 @@
+package net.braniumacademy.lesson72;
+
+/**
+ * @author Branium Academy
+ * @version 2021.08
+ * @see <a href="https://braniumacademy.net/">Branium Academy</a>
+ */
+
+import java.util.Scanner;
+
+public class Exercises1 {
+    public static void main(String[] args) {
+        HashTable<String, Student> hashTable = new HashTable<>(100);
+        Scanner input = new Scanner(System.in);
+        int choice;
+        do {
+            System.err.println("========================== MENU ==============================");
+            System.err.println("*\t1. Thêm mới 1 sinh viên.                                 *");
+            System.err.println("*\t2. Tìm sinh viên theo mã sinh viên.                      *");
+            System.err.println("*\t3. Kiểm tra xem một sinh viên có tồn tại không.          *");
+            System.err.println("*\t4. Kiểm tra key là mã sinh viên nào đó có tồn tại không. *");
+            System.err.println("*\t5. Kiểm tra bảng băm có rỗng không.                      *");
+            System.err.println("*\t6. Kiểm tra kích thước của bảng băm.                     *");
+            System.err.println("*\t7. Kết thúc chương trình.                                *");
+            System.err.println("==============================================================");
+            System.err.println("Xin mời chọn chức năng số: ");
+            choice = input.nextInt();
+            input.nextLine(); // đọc bỏ dòng trước đó
+            switch (choice) {
+                case 1: // test phương thức put và addEntry
+                    System.out.println("Mã sinh viên: ");
+                    var id = input.nextLine();
+                    System.out.println("Họ: ");
+                    var last = input.nextLine();
+                    System.out.println("Đệm: ");
+                    var mid = input.nextLine();
+                    System.out.println("Tên: ");
+                    var first = input.nextLine();
+                    System.out.println("Điểm TB: ");
+                    var gpa = Float.parseFloat(input.nextLine());
+                    hashTable.put(id, new Student(id, first, last, mid, gpa));
+                    break;
+                case 2: // test phương thức get(key)
+                    if (!hashTable.isEmpty()) {
+                        System.out.println("Nhập mã sinh viên cần tìm: ");
+                        id = input.nextLine();
+                        var result = hashTable.get(id);
+                        if (result != null) {
+                            System.out.printf("Tìm thấy sinh viên mã \"%s\"\n", id);
+                            System.out.println(result);
+                        } else {
+                            System.out.printf("Không tìm thấy sinh viên mã \"%s\"\n", id);
+                        }
+                    } else {
+                        System.err.println("=== Danh sách sinh viên rỗng! ===");
+                    }
+                    break;
+                case 3: // test phương thức containsValue(value)
+                    if (!hashTable.isEmpty()) {
+                        System.out.println("Nhập mã sinh viên cần tìm: ");
+                        id = input.nextLine();
+                        var newStudent = new Student(id);
+                        var checkStudent = hashTable.containsValue(newStudent);
+                        if (checkStudent) {
+                            System.out.printf("Tồn tại sinh viên mã \"%s\"\n", id);
+                        } else {
+                            System.out.printf("Không tồn tại sinh viên mã \"%s\"\n", id);
+                        }
+                    } else {
+                        System.err.println("=== Danh sách sinh viên rỗng! ===");
+                    }
+                    break;
+                case 4: // test phương thức containsKey(key)
+                    if (!hashTable.isEmpty()) {
+                        System.out.println("Nhập mã sinh viên cần tìm: ");
+                        id = input.nextLine();
+                        var checkKey = hashTable.containsKey(id);
+                        if (checkKey) {
+                            System.out.printf("Tồn tại sinh viên mã \"%s\"\n", id);
+                        } else {
+                            System.out.printf("Không tồn tại sinh viên mã \"%s\"\n", id);
+                        }
+                    } else {
+                        System.err.println("=== Danh sách sinh viên rỗng! ===");
+                    }
+                    break;
+                case 5: // test phương thức isEmpty()
+                    System.out.println(hashTable.isEmpty() ? "Rỗng" : "Không rỗng.");
+                    break;
+                case 6: // test phương thức size()
+                    System.out.println("Số phần tử hiện có trong bảng băm: " + hashTable.size());
+                    break;
+                case 7:
+                    System.out.println("=== Chương trình kết thúc ===");
+                    break;
+                default:
+                    System.err.println("=== Sai chức năng, vui lòng chọn lại! ===");
+                    break;
+            }
+        } while (choice != 7);
+    }
+}
