@@ -1,7 +1,12 @@
 package net.braniumacademy.lesson77;
 
+/**
+ * @author Branium Academy
+ * @version 2021.08
+ * @website https://braniumacademy.net/
+ */
+
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.Scanner;
 
 public class Exercises2 {
