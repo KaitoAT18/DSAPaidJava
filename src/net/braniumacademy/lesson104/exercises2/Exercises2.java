@@ -121,30 +121,30 @@ public class Exercises2 {
         }
     }
 
-//    private static void showPath(Vertex[] prev, Vertex target) {
-//        System.out.printf("%d\n", target.weight);
-//        var prevVertex = prev[target.index];
-//        List<Vertex> trace = new ArrayList<>();
-//        trace.add(target);
-//        while (prevVertex != null && !prevVertex.equals(prev[0])) {
-//            trace.add(prevVertex);
-//            prevVertex = prev[prevVertex.index];
-//        }
-//        for (var i = trace.size() - 1; i >= 0; i--) {
-//            var delim = i > 0 ? " -> " : "";
-//            System.out.printf("%c%s", trace.get(i).label, delim);
-//        }
-//        System.out.println();
-//    }
-
     private static void showPath(Vertex[] prev, Vertex target) {
-        System.out.printf("Đường đi ngắn nhất từ đỉnh đầu đến đỉnh %c: ", target.label);
+        System.out.printf("%d\n", target.weight);
         var prevVertex = prev[target.index];
-        System.out.print(target.label);
+        List<Vertex> trace = new ArrayList<>();
+        trace.add(target);
         while (prevVertex != null && !prevVertex.equals(prev[0])) {
-            System.out.printf(" <- %c", prevVertex.label);
+            trace.add(prevVertex);
             prevVertex = prev[prevVertex.index];
         }
-        System.out.printf("\nTổng quãng đường: %d\n", target.weight);
+        for (var i = trace.size() - 1; i >= 0; i--) {
+            var delim = i > 0 ? " -> " : "";
+            System.out.printf("%c%s", trace.get(i).label, delim);
+        }
+        System.out.println();
     }
+//
+//    private static void showPath(Vertex[] prev, Vertex target) {
+//        System.out.printf("Đường đi ngắn nhất từ đỉnh đầu đến đỉnh %c: ", target.label);
+//        var prevVertex = prev[target.index];
+//        System.out.print(target.label);
+//        while (prevVertex != null && !prevVertex.equals(prev[0])) {
+//            System.out.printf(" <- %c", prevVertex.label);
+//            prevVertex = prev[prevVertex.index];
+//        }
+//        System.out.printf("\nTổng quãng đường: %d\n", target.weight);
+//    }
 }
