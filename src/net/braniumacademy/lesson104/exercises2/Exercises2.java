@@ -66,9 +66,9 @@ public class Exercises2 {
         vertices[source].weight = 0; // đỉnh bắt đầu duyệt sẽ có trọng số bằng 0
         while (!unvisited.isEmpty()) { // lặp đến khi danh sách unvisited rỗng
             var u = findMinWeightVertex(unvisited); // tìm đỉnh có trọng số nhỏ nhất
-//            if (u.label == target) { // nếu u là đỉnh đích
-//                break; // kết thúc thuật toán
-//            }
+            if (u.label == target) { // nếu u là đỉnh đích
+                break; // kết thúc thuật toán
+            }
             unvisited.remove(u); // xóa khỏi tập đỉnh unvisited
             for (int v = 0; v < vertices.length; v++) { // duyệt từng đỉnh của đồ thị
                 if (weightMatrix[u.index][v] != 0 && unvisited.contains(vertices[v])) {
@@ -113,6 +113,7 @@ public class Exercises2 {
                 weightMatrix[i][j] = input.nextInt();
             }
         }
+        input.close();
         // thực hiện thuật toán Dijkstra
         for (int i = 1; i < n; i++) {
             var target = vertices[i];
@@ -136,15 +137,4 @@ public class Exercises2 {
         }
         System.out.println();
     }
-//
-//    private static void showPath(Vertex[] prev, Vertex target) {
-//        System.out.printf("Đường đi ngắn nhất từ đỉnh đầu đến đỉnh %c: ", target.label);
-//        var prevVertex = prev[target.index];
-//        System.out.print(target.label);
-//        while (prevVertex != null && !prevVertex.equals(prev[0])) {
-//            System.out.printf(" <- %c", prevVertex.label);
-//            prevVertex = prev[prevVertex.index];
-//        }
-//        System.out.printf("\nTổng quãng đường: %d\n", target.weight);
-//    }
 }
