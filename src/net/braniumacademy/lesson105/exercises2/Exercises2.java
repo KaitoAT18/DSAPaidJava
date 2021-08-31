@@ -36,10 +36,6 @@ public class Exercises2 {
         vertices[index] = vertex;
     }
 
-    public static void addEdge(int[][] weightMatrix, int start, int end, int value) {
-        weightMatrix[start][end] = value;
-    }
-
     public static Vertex[] bellmanFord(Vertex[] vertices, List<Edge> edges, int source) {
         // b1: khởi tạo
         Vertex[] prev = new Vertex[vertices.length];
@@ -70,20 +66,9 @@ public class Exercises2 {
         return prev;
     }
 
-    private static Vertex findMinWeightVertex(List<Vertex> unvisited) {
-        var minIndex = 0;
-        double minWeight = Integer.MAX_VALUE;
-        for (int i = 0; i < unvisited.size(); i++) {
-            if (minWeight > unvisited.get(i).weight) {
-                minIndex = i;
-                minWeight = unvisited.get(i).weight;
-            }
-        }
-        return unvisited.get(minIndex);
-    }
-
     public static void main(String[] args) throws FileNotFoundException {
-        var input = new Scanner(new File("./src/net/braniumacademy/lesson105/exercises2/weight.dat"));
+        var pathName = "./src/net/braniumacademy/lesson105/exercises2/weight.dat";
+        var input = new Scanner(new File(pathName));
         var n = input.nextInt(); // số đỉnh
         Vertex[] vertices = new Vertex[n];
         for (int i = 0; i < n; i++) {

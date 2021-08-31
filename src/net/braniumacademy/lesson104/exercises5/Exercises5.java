@@ -99,7 +99,8 @@ public class Exercises5 {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        var input = new Scanner(new File("./src/net/braniumacademy/lesson104/exercises5/weight.dat"));
+        var pathName = "./src/net/braniumacademy/lesson104/exercises5/weight.dat";
+        var input = new Scanner(new File(pathName));
         var n = input.nextInt(); // số đỉnh
         Vertex[] vertices = new Vertex[n];
         for (int i = 0; i < n; i++) {

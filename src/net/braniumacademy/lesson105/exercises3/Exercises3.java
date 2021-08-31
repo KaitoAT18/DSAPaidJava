@@ -1,13 +1,12 @@
-package net.braniumacademy.lesson105.exercises1;
+package net.braniumacademy.lesson105.exercises3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 
-public class Exercises1 {
+public class Exercises3 {
     static class Vertex { // lớp mô tả thông tin 1 đỉnh
         private static int autoIndex = 0; // vị trí tự tăng từ 0
         private final char label;   // tên đỉnh
@@ -68,10 +67,9 @@ public class Exercises1 {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        var pathName = "./src/net/braniumacademy/lesson105/exercises1/weight.dat";
+        var pathName = "./src/net/braniumacademy/lesson105/exercises3/weight.dat";
         var input = new Scanner(new File(pathName));
         var n = input.nextInt(); // số đỉnh
-        var v = input.nextInt(); // đỉnh đích
         Vertex[] vertices = new Vertex[n];
         for (int i = 0; i < n; i++) {
             var label = (char) (i + 1 + 48);
@@ -87,19 +85,29 @@ public class Exercises1 {
                 }
             }
         }
-        input.close();
         // thực hiện thuật toán Bellman-Ford
-        var target = vertices[v - 1];
-        var prev = bellmanFord(vertices, edges, 0);
-        showPath(prev, target);
+
+        var test = input.nextInt();
+        for (int i = 0; i < test; i++) {
+            var start = input.nextInt();
+            var end = input.nextInt();
+            var prev = bellmanFord(vertices, edges, start - 1);
+            var target = vertices[end - 1];
+            if (prev != null) {
+                showPath(prev, start - 1, target);
+            } else {
+                System.out.println("Không có kết quả.");
+            }
+        }
+        input.close();
     }
 
-    private static void showPath(Vertex[] prev, Vertex target) {
+    private static void showPath(Vertex[] prev, int start, Vertex target) {
         System.out.printf("%d\n", target.weight);
         var prevVertex = prev[target.index];
         List<Vertex> trace = new ArrayList<>();
         trace.add(target);
-        while (prevVertex != null && !prevVertex.equals(prev[0])) {
+        while (prevVertex != null && !prevVertex.equals(prev[start])) {
             trace.add(prevVertex);
             prevVertex = prev[prevVertex.index];
         }
@@ -107,5 +115,6 @@ public class Exercises1 {
             var delim = i > 0 ? " -> " : "";
             System.out.printf("%c%s", trace.get(i).label, delim);
         }
+        System.out.println();
     }
 }
