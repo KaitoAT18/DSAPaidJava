@@ -1,10 +1,12 @@
-package net.braniumacademy.lesson102.exercises1;
+package net.braniumacademy.lesson102.exercises2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.Stack;
 
-public class Exercises1 {
+public class Exercises2 {
     static class Vertex { // lớp mô tả thông tin 1 đỉnh
         private final char label;   // tên đỉnh
         private boolean visited;
@@ -32,9 +34,8 @@ public class Exercises1 {
         vertices[index] = vertex;
     }
 
-    public static void addEdge(boolean[][] adjMatrix, int start, int end, int value) {
-        adjMatrix[start][end] = value != 0;
-        adjMatrix[end][start] = value != 0;
+    public static void addEdge(boolean[][] adjMatrix, int start, int end, boolean value) {
+        adjMatrix[start][end] = value;
     }
 
     public static boolean dfs(Vertex[] vertices, boolean[][] adjMatrix, int index) {
@@ -57,23 +58,23 @@ public class Exercises1 {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        var pathName = "./src/net/braniumacademy/lesson102/exercises1/input.dat";
+        var pathName = "./src/net/braniumacademy/lesson102/exercises2/input.dat";
         var input = new Scanner(new File(pathName));
-        var t = input.nextInt(); // số đỉnh
+        var t = input.nextInt(); // số bộ test
         while (t-- > 0) {
-            var n = input.nextInt(); // đỉnh đích
+            var n = input.nextInt(); // số đỉnh
+            var edge = input.nextInt(); // số cạnh
             Vertex[] vertices = new Vertex[n];
             for (int i = 0; i < n; i++) {
                 var label = (char) (i + 1 + 48);
                 addVertex(vertices, label, i);
             }
-            // đọc ma trận kề
+            // đọc tập cạnh
             boolean[][] adjMatrix = new boolean[n][n];
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    var value = input.nextInt();
-                    addEdge(adjMatrix, i, j, value);
-                }
+            for (int i = 0; i < edge; i++) {
+                var start = input.nextInt();
+                var end = input.nextInt();
+                addEdge(adjMatrix, start - 1, end - 1, true);
             }
             // kiểm tra tính liên thông
             if (dfs(vertices, adjMatrix, 0)) {
@@ -83,6 +84,5 @@ public class Exercises1 {
             }
         }
         input.close();
-
     }
 }
