@@ -1,4 +1,4 @@
-package net.braniumacademy.lesson102.exercises2;
+package net.braniumacademy.lesson102.exercises3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.Stack;
 
 // tham khảo thuật toán Kosaraju
-public class Exercises2 {
+public class Exercises3 {
     static class Vertex { // lớp mô tả thông tin 1 đỉnh
         private final char label;   // tên đỉnh
         private boolean visited;
@@ -39,17 +39,11 @@ public class Exercises2 {
         adjMatrix[start][end] = value;
     }
 
-    /**
-     * Thuật toán duyệt theo chiều sâu đệ quy.
-     *
-     * @param vertices  danh sách đỉnh
-     * @param adjMatrix ma trận kề của đồ thị
-     * @param v         vị trí đỉnh bắt đầu duyệt
-     */
-    public static void dfs(Vertex[] vertices, boolean[][] adjMatrix, int v) {
-        vertices[v].visited = true;
+    public static void dfs(Vertex[] vertices, boolean[][] adjMatrix, int index) {
+        vertices[index].visited = true;
+        System.out.printf("%c ", vertices[index].label);
         for (int i = 0; i < vertices.length; i++) {
-            if (adjMatrix[v][i] && !vertices[i].visited) {
+            if (adjMatrix[index][i] && !vertices[i].visited) {
                 dfs(vertices, adjMatrix, i);
             }
         }
@@ -78,14 +72,8 @@ public class Exercises2 {
         stack.push(vertices[v]);
     }
 
-    /**
-     * Phương thức đếm số thành phần liên thông trong đồ thị có hướng
-     *
-     * @param vertices  danh sách đỉnh hay còn gọi là tập đỉnh
-     * @param adjMatrix ma trận kề của đồ thị
-     * @return số thành phần liên thông trong đồ thị
-     */
-    public static int findSCComponents(Vertex[] vertices, boolean[][] adjMatrix) {
+    public static void printStrongConnectedComponents(Vertex[] vertices,
+                                                      boolean[][] adjMatrix) {
         Stack<Vertex> stack = new Stack<>();
         // đưa các đỉnh vào stack theo thứ tự kết thúc của nó
         for (int i = 0; i < vertices.length; i++) {
@@ -99,21 +87,19 @@ public class Exercises2 {
         for (Vertex vertex : vertices) {
             vertex.visited = false;
         }
-        var counter = 0;
         while (!stack.isEmpty()) {
             Vertex v = stack.pop();
             if (!v.visited) {
                 // đưa từ kí tự số về chữ số phải trừ 48(tham khảo bảng mã ASCII)
                 // trừ thêm 1 vì nhãn đánh số từ 1
                 dfs(vertices, revAdjMatrix, (v.label - 48 - 1));
-                counter++;
+                System.out.println();
             }
         }
-        return counter;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        var pathName = "./src/net/braniumacademy/lesson102/exercises2/input.dat";
+        var pathName = "./src/net/braniumacademy/lesson102/exercises3/input.dat";
         var input = new Scanner(new File(pathName));
         var t = input.nextInt(); // số bộ test
         var testCount = 1; // biến lưu thứ tự các test
@@ -133,8 +119,8 @@ public class Exercises2 {
                 addEdge(adjMatrix, start - 1, end - 1, true);
             }
             // Liệt kê các thành phần liên thông của đồ thị
-            var result = findSCComponents(vertices, adjMatrix);
-            System.out.printf("Test %d: %d\n", testCount++, result);
+            System.out.printf("Test %d: \n", testCount++);
+            printStrongConnectedComponents(vertices, adjMatrix);
         }
         input.close();
     }
