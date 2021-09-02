@@ -85,6 +85,8 @@ public class Exercises4 {
                         System.out.println("Nhập giới hạn mức lương cách nhau bởi dấu cách: ");
                         var fromSalary = input.nextInt();
                         var toSalary = input.nextInt();
+                        mergeSort(employees, 0, employees.size() - 1,
+                                (emp1, emp2) -> emp1.getSalary() - emp2.getSalary());
                         var resultList = searchBySalary(employees, fromSalary, toSalary);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
@@ -184,10 +186,14 @@ public class Exercises4 {
 
     private static List<Employee> searchBySalary(List<Employee> employees, int fromSalary, int toSalary) {
         List<Employee> result = new ArrayList<>();
-        for (var e : employees) {
-            if (e.getSalary() >= fromSalary && e.getSalary() <= toSalary) {
-                result.add(e);
-            }
+        int startPos = leftMostSalary(employees, 0, employees.size() - 1, fromSalary);
+        if (startPos == -1) { // không tìm thấy salary
+            return result;
+        }
+        // tìm vị trí phải củng xuất hiện salary
+        int endPos = rightMostSalary(employees, 0, employees.size() - 1, toSalary);
+        for (int i = startPos; i <= endPos; i++) {
+            result.add(employees.get(i));
         }
         return result;
     }
@@ -213,7 +219,7 @@ public class Exercises4 {
                     salary && employees.get(mid).getSalary() == salary) {
                 return mid;
             }
-            if (employees.get(mid).getSalary() <= salary) { // tìm phía bên phải
+            if (employees.get(mid).getSalary() < salary) { // tìm phía bên phải
                 return leftMostSalary(employees, mid + 1, right, salary);
             } else { // tìm phía trái
                 return leftMostSalary(employees, left, mid - 1, salary);

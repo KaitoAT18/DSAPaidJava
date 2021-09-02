@@ -68,7 +68,7 @@ public class Exercises3 {
             if (mid == 0 || arr[mid - 1].compareTo(x) < 0 && arr[mid].compareTo(x) == 0) {
                 return mid;
             }
-            if (arr[mid].compareTo(x) <= 0) { // tìm phía bên phải
+            if (arr[mid].compareTo(x) < 0) { // tìm phía bên phải
                 return leftMostX(arr, mid + 1, right, x);
             } else { // tìm phía trái
                 return leftMostX(arr, left, mid - 1, x);
