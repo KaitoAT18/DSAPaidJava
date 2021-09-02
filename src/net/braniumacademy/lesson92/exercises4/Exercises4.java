@@ -49,7 +49,6 @@ public class Exercises4 {
                         var resultList = searchByName(employees, nameToSearch);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
-                            showHeader();
                             showEmpInfo(resultList);
                         } else {
                             System.err.println("==== Không tìm thấy kết quả nào ====");
@@ -65,7 +64,6 @@ public class Exercises4 {
                         var resultList = searchBySalary(employees, salaryToSearch);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
-                            showHeader();
                             showEmpInfo(resultList);
                         } else {
                             System.err.println("==== Không tìm thấy kết quả nào ====");
@@ -82,7 +80,6 @@ public class Exercises4 {
                         var resultList = searchBySalary(employees, fromSalary, toSalary);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
-                            showHeader();
                             showEmpInfo(resultList);
                         } else {
                             System.err.println("==== Không tìm thấy kết quả nào ====");
@@ -126,7 +123,7 @@ public class Exercises4 {
                     System.err.println("=== Sai chức năng, vui lòng chọn lại! ===");
                     break;
             }
-        } while (choice != 13);
+        } while (choice != 7);
     }
 
     // thuật toán sắp xếp trộn đệ quy, first, last: chỉ số phần tử đầu, cuối

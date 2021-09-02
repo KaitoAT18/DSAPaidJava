@@ -55,7 +55,6 @@ public class Exercises4 {
                         var resultList = searchByName(employees, nameToSearch);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
-                            showHeader();
                             showEmpInfo(resultList);
                         } else {
                             System.err.println("==== Không tìm thấy kết quả nào ====");
@@ -68,10 +67,11 @@ public class Exercises4 {
                     if (!employees.isEmpty()) {
                         System.out.println("Nhập mức lương: ");
                         var salaryToSearch = Integer.parseInt(input.nextLine());
+                        mergeSort(employees, 0, employees.size() - 1,
+                                (emp1, emp2) -> emp1.getSalary() - emp2.getSalary());
                         var resultList = searchBySalary(employees, salaryToSearch);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
-                            showHeader();
                             showEmpInfo(resultList);
                         } else {
                             System.err.println("==== Không tìm thấy kết quả nào ====");
@@ -88,7 +88,6 @@ public class Exercises4 {
                         var resultList = searchBySalary(employees, fromSalary, toSalary);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
-                            showHeader();
                             showEmpInfo(resultList);
                         } else {
                             System.err.println("==== Không tìm thấy kết quả nào ====");
@@ -132,7 +131,7 @@ public class Exercises4 {
                     System.err.println("=== Sai chức năng, vui lòng chọn lại! ===");
                     break;
             }
-        } while (choice != 13);
+        } while (choice != 7);
     }
 
     // thuật toán sắp xếp trộn đệ quy, first, last: chỉ số phần tử đầu, cuối
@@ -193,14 +192,50 @@ public class Exercises4 {
         return result;
     }
 
-    private static List<Employee> searchBySalary(List<Employee> employees, int salaryToSearch) {
+    private static List<Employee> searchBySalary(List<Employee> employees, int salary) {
         List<Employee> result = new ArrayList<>();
-        for (var e : employees) {
-            if (e.getSalary() == salaryToSearch) {
-                result.add(e);
-            }
+        int startPos = leftMostSalary(employees, 0, employees.size() - 1, salary);
+        if (startPos == -1) { // không tìm thấy salary
+            return result;
+        }
+        // tìm vị trí phải củng xuất hiện salary
+        int endPos = rightMostSalary(employees, 0, employees.size() - 1, salary);
+        for (int i = startPos; i <= endPos; i++) {
+            result.add(employees.get(i));
         }
         return result;
+    }
+
+    private static int leftMostSalary(List<Employee> employees, int left, int right, int salary) {
+        if (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (mid == 0 || employees.get(mid - 1).getSalary() <
+                    salary && employees.get(mid).getSalary() == salary) {
+                return mid;
+            }
+            if (employees.get(mid).getSalary() <= salary) { // tìm phía bên phải
+                return leftMostSalary(employees, mid + 1, right, salary);
+            } else { // tìm phía trái
+                return leftMostSalary(employees, left, mid - 1, salary);
+            }
+        }
+        return -1;
+    }
+
+    private static int rightMostSalary(List<Employee> employees, int left, int right, int salary) {
+        if (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (mid == employees.size() - 1 || employees.get(mid + 1).getSalary() >
+                    salary && employees.get(mid).getSalary() == salary) {
+                return mid;
+            }
+            if (employees.get(mid).getSalary() <= salary) { // tìm phía bên phải
+                return rightMostSalary(employees, mid + 1, right, salary);
+            } else { // tìm phía trái
+                return rightMostSalary(employees, left, mid - 1, salary);
+            }
+        }
+        return -1;
     }
 
     private static List<Employee> searchByName(List<Employee> employees, String nameToSearch) {
