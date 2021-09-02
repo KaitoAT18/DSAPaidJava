@@ -16,7 +16,8 @@ import java.util.Scanner;
 public class Exercises4 {
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
-        readDataFromFile(employees);
+        BinarySearchTree treeEmp = new BinarySearchTree();
+        readDataFromFile(treeEmp);
         Scanner input = new Scanner(System.in);
         int choice;
         do {
@@ -36,10 +37,7 @@ public class Exercises4 {
                 case 1:
                     System.out.println("Nhập mã nhân viên cần tìm: ");
                     var id = input.nextLine();
-                    mergeSort(employees, 0, employees.size() - 1, (emp1, emp2) -> {
-                        return emp1.getId().compareTo(emp2.getId());
-                    });
-                    var searchResult = searchById(employees, 0, employees.size() - 1, new Employee(id));
+                    var searchResult = treeEmp.searchById(new Employee(id));
                     if (searchResult == null) {
                         System.err.println("==== Không có kết quả ====");
                     } else {
@@ -49,10 +47,10 @@ public class Exercises4 {
                     }
                     break;
                 case 2:
-                    if (!employees.isEmpty()) {
+                    if (!treeEmp.isEmpty()) {
                         System.out.println("Nhập tên cần tìm: ");
                         var nameToSearch = input.nextLine();
-                        var resultList = searchByName(employees, nameToSearch);
+                        var resultList = treeEmp.searchByName(nameToSearch);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
                             showEmpInfo(resultList);
@@ -64,12 +62,10 @@ public class Exercises4 {
                     }
                     break;
                 case 3:
-                    if (!employees.isEmpty()) {
+                    if (!treeEmp.isEmpty()) {
                         System.out.println("Nhập mức lương: ");
                         var salaryToSearch = Integer.parseInt(input.nextLine());
-                        mergeSort(employees, 0, employees.size() - 1,
-                                (emp1, emp2) -> emp1.getSalary() - emp2.getSalary());
-                        var resultList = searchBySalary(employees, salaryToSearch);
+                        var resultList = new ArrayList<Employee>();
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
                             showEmpInfo(resultList);
@@ -85,8 +81,6 @@ public class Exercises4 {
                         System.out.println("Nhập giới hạn mức lương cách nhau bởi dấu cách: ");
                         var fromSalary = input.nextInt();
                         var toSalary = input.nextInt();
-                        mergeSort(employees, 0, employees.size() - 1,
-                                (emp1, emp2) -> emp1.getSalary() - emp2.getSalary());
                         var resultList = searchBySalary(employees, fromSalary, toSalary);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
@@ -287,14 +281,14 @@ public class Exercises4 {
                 "Mã NV", "Họ", "Đệm", "Tên", "Lương");
     }
 
-    private static void readDataFromFile(List<Employee> employees) {
+    private static void readDataFromFile(BinarySearchTree tree) {
         var pathName = "./src/net/braniumacademy/lesson94/exercises4/INPUT.DAT";
         try (var input = new Scanner(new File(pathName));) {
             int numberOfEmployee = input.nextInt();
             input.nextLine();
             for (int i = 0; i < numberOfEmployee; i++) {
                 var empStr = input.nextLine();
-                employees.add(createEmp(empStr));
+                tree.add(createEmp(empStr));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
