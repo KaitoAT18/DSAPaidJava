@@ -1,8 +1,9 @@
 package net.braniumacademy.lesson45.exercises1;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DoublyLinkedList<E> implements Iterable<E> {
+public class LinkedList<E> {
     private Node<E> head;
 
     public void minPriorityElements() {
@@ -22,32 +23,6 @@ public class DoublyLinkedList<E> implements Iterable<E> {
             }
             System.out.println();
         }
-    }
-
-    @Override
-    public Iterator<E> iterator() {
-        return new MIterator();
-    }
-
-    class MIterator implements Iterator<E> {
-        private Node<E> p;
-
-            public MIterator() {
-                Node<E> beforeHead = new Node<>(null, 0);
-                beforeHead.next = head;
-                head.prev = beforeHead;
-                p = beforeHead;
-            }
-
-            @Override
-            public boolean hasNext() {
-            return p.next != null;
-        }
-
-            @Override
-            public E next() {
-            return p.data;
-            }
     }
 
     static class Node<E> {
@@ -80,7 +55,7 @@ public class DoublyLinkedList<E> implements Iterable<E> {
                 }
                 r = q;
             }
-            if(r == head) {
+            if (r == head) {
                 head.next = p;
                 p.prev = head;
             } else {
@@ -110,5 +85,15 @@ public class DoublyLinkedList<E> implements Iterable<E> {
 
     private boolean isEmpty() {
         return head == null;
+    }
+
+    public List<E> toList() {
+        List<E> list = new ArrayList<>();
+        Node<E> p = head;
+        while (p != null) {
+            list.add(p.data);
+            p = p.next;
+        }
+        return list;
     }
 }

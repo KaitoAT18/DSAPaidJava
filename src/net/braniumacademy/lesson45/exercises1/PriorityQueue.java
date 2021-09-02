@@ -2,11 +2,11 @@ package net.braniumacademy.lesson45.exercises1;
 
 public class PriorityQueue<E> {
     private int currentSize;
-    private DoublyLinkedList<E> data;
+    private LinkedList<E> data;
 
     public PriorityQueue() {
         currentSize = 0;
-        data = new DoublyLinkedList<>();
+        data = new LinkedList<>();
     }
 
     public void add(E e, int priority) {
@@ -34,7 +34,7 @@ public class PriorityQueue<E> {
     }
 
     public void display() {
-        for (var e : data) {
+        for (var e : data.toList()) {
             System.out.print(e + " ");
         }
         System.out.println();
