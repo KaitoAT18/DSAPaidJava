@@ -15,9 +15,9 @@ import java.util.Scanner;
 
 public class Exercises4 {
     public static void main(String[] args) {
-        List<Employee> employees = new ArrayList<>();
         BinarySearchTree treeEmp = new BinarySearchTree();
         readDataFromFile(treeEmp);
+        var employees = treeEmp.toList();
         Scanner input = new Scanner(System.in);
         int choice;
         do {
@@ -65,7 +65,7 @@ public class Exercises4 {
                     if (!treeEmp.isEmpty()) {
                         System.out.println("Nhập mức lương: ");
                         var salaryToSearch = Integer.parseInt(input.nextLine());
-                        var resultList = new ArrayList<Employee>();
+                        var resultList = treeEmp.searchBySalary(salaryToSearch);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
                             showEmpInfo(resultList);
@@ -77,11 +77,11 @@ public class Exercises4 {
                     }
                     break;
                 case 4:
-                    if (!employees.isEmpty()) {
+                    if (!treeEmp.isEmpty()) {
                         System.out.println("Nhập giới hạn mức lương cách nhau bởi dấu cách: ");
                         var fromSalary = input.nextInt();
                         var toSalary = input.nextInt();
-                        var resultList = searchBySalary(employees, fromSalary, toSalary);
+                        var resultList = treeEmp.searchBySalary(fromSalary, toSalary);
                         if (resultList.size() > 0) {
                             System.out.println("==== Kết quả tìm kiếm ====");
                             showEmpInfo(resultList);
@@ -93,7 +93,7 @@ public class Exercises4 {
                     }
                     break;
                 case 5:
-                    if (!employees.isEmpty()) {
+                    if (!treeEmp.isEmpty()) {
                         mergeSort(employees, 0, employees.size() - 1, (first, other) -> {
                             var salaryCompare = other.getSalary() - first.getSalary();
                             if (salaryCompare != 0) {
@@ -113,7 +113,7 @@ public class Exercises4 {
                     }
                     break;
                 case 6:
-                    if (!employees.isEmpty()) {
+                    if (!treeEmp.isEmpty()) {
                         System.out.println("================== DANH SÁCH NHÂN VIÊN ===================");
                         showEmpInfo(employees);
                     } else {
@@ -178,92 +178,6 @@ public class Exercises4 {
         }
     }
 
-    private static List<Employee> searchBySalary(List<Employee> employees, int fromSalary, int toSalary) {
-        List<Employee> result = new ArrayList<>();
-        int startPos = leftMostSalary(employees, 0, employees.size() - 1, fromSalary);
-        if (startPos == -1) { // không tìm thấy salary
-            return result;
-        }
-        // tìm vị trí phải củng xuất hiện salary
-        int endPos = rightMostSalary(employees, 0, employees.size() - 1, toSalary);
-        for (int i = startPos; i <= endPos; i++) {
-            result.add(employees.get(i));
-        }
-        return result;
-    }
-
-    private static List<Employee> searchBySalary(List<Employee> employees, int salary) {
-        List<Employee> result = new ArrayList<>();
-        int startPos = leftMostSalary(employees, 0, employees.size() - 1, salary);
-        if (startPos == -1) { // không tìm thấy salary
-            return result;
-        }
-        // tìm vị trí phải củng xuất hiện salary
-        int endPos = rightMostSalary(employees, 0, employees.size() - 1, salary);
-        for (int i = startPos; i <= endPos; i++) {
-            result.add(employees.get(i));
-        }
-        return result;
-    }
-
-    private static int leftMostSalary(List<Employee> employees, int left, int right, int salary) {
-        if (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (mid == 0 || employees.get(mid - 1).getSalary() <
-                    salary && employees.get(mid).getSalary() == salary) {
-                return mid;
-            }
-            if (employees.get(mid).getSalary() < salary) { // tìm phía bên phải
-                return leftMostSalary(employees, mid + 1, right, salary);
-            } else { // tìm phía trái
-                return leftMostSalary(employees, left, mid - 1, salary);
-            }
-        }
-        return -1;
-    }
-
-    private static int rightMostSalary(List<Employee> employees, int left, int right, int salary) {
-        if (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (mid == employees.size() - 1 || employees.get(mid + 1).getSalary() >
-                    salary && employees.get(mid).getSalary() == salary) {
-                return mid;
-            }
-            if (employees.get(mid).getSalary() <= salary) { // tìm phía bên phải
-                return rightMostSalary(employees, mid + 1, right, salary);
-            } else { // tìm phía trái
-                return rightMostSalary(employees, left, mid - 1, salary);
-            }
-        }
-        return -1;
-    }
-
-    private static List<Employee> searchByName(List<Employee> employees, String nameToSearch) {
-        List<Employee> result = new ArrayList<>();
-        for (var e : employees) {
-            if (e.getFirst().toLowerCase().matches(".*" + nameToSearch.toLowerCase() + ".*")) {
-                result.add(e);
-            }
-        }
-        return result;
-    }
-
-    // tìm nhân viên theo mã nhân viên
-    private static <T extends Comparable<T>> T searchById(List<T> employees, int left, int right, T x) {
-        if (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (employees.get(mid).compareTo(x) == 0) { // tìm thấy x trong mảng
-                return employees.get(mid);
-            }
-            if (employees.get(mid).compareTo(x) < 0) { // tìm phía bên phải
-                return searchById(employees, mid + 1, right, x);
-            } else { // tìm phía trái
-                return searchById(employees, left, mid - 1, x);
-            }
-        }
-        return null;
-    }
-
     private static void showEmpInfo(List<Employee> employees) {
         showHeader();
         for (var e : employees) {
@@ -283,7 +197,7 @@ public class Exercises4 {
 
     private static void readDataFromFile(BinarySearchTree tree) {
         var pathName = "./src/net/braniumacademy/lesson94/exercises4/INPUT.DAT";
-        try (var input = new Scanner(new File(pathName));) {
+        try (var input = new Scanner(new File(pathName))) {
             int numberOfEmployee = input.nextInt();
             input.nextLine();
             for (int i = 0; i < numberOfEmployee; i++) {

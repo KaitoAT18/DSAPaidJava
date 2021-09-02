@@ -62,12 +62,58 @@ public class BinarySearchTree {
     }
 
     private void searchByName(Node r, List<Employee> employees, String key) {
-        if(r != null) {
+        if (r != null) {
             searchByName(r.leftNode, employees, key);
             if (r.data.getFirst().matches(".*" + key + ".*")) {
                 employees.add(r.data);
             }
             searchByName(r.rightNode, employees, key);
+        }
+    }
+
+    public List<Employee> searchBySalary(int salary) {
+        List<Employee> employees = new ArrayList<>();
+        searchBySalary(root, employees, salary);
+        return employees;
+    }
+
+    private void searchBySalary(Node r, List<Employee> employees, int salary) {
+        if (r != null) {
+            searchBySalary(r.leftNode, employees, salary);
+            if (r.data.getSalary() == salary) {
+                employees.add(r.data);
+            }
+            searchBySalary(r.rightNode, employees, salary);
+        }
+    }
+
+    public List<Employee> searchBySalary(int fromSalary, int toSalary) {
+        List<Employee> employees = new ArrayList<>();
+        searchBySalary(root, employees, fromSalary, toSalary);
+        return employees;
+    }
+
+    private void searchBySalary(Node r, List<Employee> employees, int fromSalary, int toSalary) {
+        if (r != null) {
+            searchBySalary(r.leftNode, employees, fromSalary, toSalary);
+            if (r.data.getSalary() >= fromSalary && r.data.getSalary() <= toSalary) {
+                employees.add(r.data);
+            }
+            searchBySalary(r.rightNode, employees, fromSalary, toSalary);
+        }
+    }
+
+    public List<Employee> toList() {
+        List<Employee> employees = new ArrayList<>();
+        toList(root, employees);
+        return employees;
+    }
+
+    private void toList(Node root, List<Employee> employees) {
+        if(root != null) {
+            toList(root.leftNode, employees);
+            employees.add(root.data);
+            toList(root.rightNode, employees);
         }
     }
 }
