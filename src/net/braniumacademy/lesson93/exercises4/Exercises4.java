@@ -33,7 +33,7 @@ public class Exercises4 {
             choice = input.nextInt();
             input.nextLine(); // đọc bỏ dòng trước đó
             switch (choice) {
-                case 1: // test phương thức put()4 và addEntry()2
+                case 1:
                     System.out.println("Nhập mã nhân viên cần tìm: ");
                     var id = input.nextLine();
                     mergeSort(employees, 0, employees.size() - 1, (emp1, emp2) -> {
@@ -48,7 +48,7 @@ public class Exercises4 {
                         showEachEmp(searchResult);
                     }
                     break;
-                case 2: // test phương thức forEach()14
+                case 2:
                     if (!employees.isEmpty()) {
                         System.out.println("Nhập tên cần tìm: ");
                         var nameToSearch = input.nextLine();
@@ -64,7 +64,7 @@ public class Exercises4 {
                         System.err.println("=== Danh sách nhân viên rỗng! ===");
                     }
                     break;
-                case 3: // test phương thức get(key)3
+                case 3:
                     if (!employees.isEmpty()) {
                         System.out.println("Nhập mức lương: ");
                         var salaryToSearch = Integer.parseInt(input.nextLine());
@@ -80,7 +80,7 @@ public class Exercises4 {
                         System.err.println("=== Danh sách nhân viên rỗng! ===");
                     }
                     break;
-                case 4: // test phương thức containsValue(value)5
+                case 4:
                     if (!employees.isEmpty()) {
                         System.out.println("Nhập giới hạn mức lương cách nhau bởi dấu cách: ");
                         var fromSalary = input.nextInt();
