@@ -74,14 +74,13 @@ public class Exercises3 {
                 stack.push(e);
             } else if (e.equals(")")) { // là dấu ngoặc đóng
                 var operator = stack.pop();
-                while (!operator.equals("(")) {
+                while (operator != null && !operator.equals("(")) {
                     result.append(operator).append(" ");
                     operator = stack.pop();
                 }
-
             } else if (e.equals("(")) { // là dấu ngoặc mở
-                stack.push(e);
-            } else { // nếu là toán hạng, push vào stack
+                stack.push(e); // thêm ( vào stack
+            } else { // nếu là toán hạng, add e vào kết quả
                 result.append(e).append(" ");
             }
         }

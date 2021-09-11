@@ -32,6 +32,15 @@ public class FindSecondMax {
         return secondMax;
     }
 
+    private static int findSecondMaxRec(int[] arr, int max, int secondMax) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > secondMax && arr[i] != max) {
+                secondMax = arr[i];
+            }
+        }
+        return secondMax;
+    }
+
     private static int findMax(int[] arr) {
         var max = arr[0];
         for (int i = 0; i < arr.length; i++) {
