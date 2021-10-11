@@ -7,7 +7,7 @@ package net.braniumacademy.lesson15;
  */
 
 public class Exercises2 {
-    private static long[] fa = new long[20];
+    private static long[] fa = new long[20 + 1];
 
     public static void main(String[] args) {
         System.out.println(factorial(5));
