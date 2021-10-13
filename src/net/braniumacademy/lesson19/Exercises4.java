@@ -1,5 +1,7 @@
 package net.braniumacademy.lesson19;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -59,8 +61,8 @@ public class Exercises4 {
         System.out.println();
     }
 
-    public static void main(String[] args) {
-        var input = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException {
+        var input = new Scanner(new File("./src/net/braniumacademy/lesson19/CONTEST.INP"));
         var t = input.nextInt();
         input.nextLine();
         var count = 1;

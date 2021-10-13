@@ -12,7 +12,6 @@ public class Exercises2 {
     public static void main(String[] args) {
         System.out.println(factorial(5));
     }
-
     // top-down
     private static long factorial(int n) {
         if (n == 0) {
