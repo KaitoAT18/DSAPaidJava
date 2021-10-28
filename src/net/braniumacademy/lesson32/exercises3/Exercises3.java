@@ -83,7 +83,7 @@ public class Exercises3 {
 
             } else if (e.equals("(")) { // là dấu ngoặc mở
                 stack.push(e);
-            } else { // nếu là toán hạng, push vào stack
+            } else { // nếu là toán hạng, thêm vào kết quả
                 result.append(e).append(" ");
             }
         }

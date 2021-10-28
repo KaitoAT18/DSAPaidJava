@@ -65,7 +65,7 @@ public class Exercises3 {
     private static int leftMostX(String[] arr, int left, int right, String x) {
         if (left <= right) {
             int mid = left + (right - left) / 2;
-            if (mid == 0 || arr[mid - 1].compareTo(x) < 0 && arr[mid].compareTo(x) == 0) {
+            if ((mid == 0 || arr[mid - 1].compareTo(x) < 0) && arr[mid].compareTo(x) == 0) {
                 return mid;
             }
             if (arr[mid].compareTo(x) < 0) { // tìm phía bên phải
@@ -80,7 +80,7 @@ public class Exercises3 {
     private static int rightMostX(String[] arr, int left, int right, String x) {
         if (left <= right) {
             int mid = left + (right - left) / 2;
-            if (mid == arr.length - 1 || arr[mid + 1].compareTo(x) > 0 && arr[mid].compareTo(x) == 0) {
+            if ((mid == arr.length - 1 || arr[mid + 1].compareTo(x) > 0) && arr[mid].compareTo(x) == 0) {
                 return mid;
             }
             if (arr[mid].compareTo(x) <= 0) { // tìm phía bên phải
