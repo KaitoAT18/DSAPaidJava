@@ -28,6 +28,7 @@ public class Exercises7 {
         return output;
     }
 
+
     public static void main(String[] args) {
         int t, count = 1;
         var input = new Scanner(System.in);

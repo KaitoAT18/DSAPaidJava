@@ -116,11 +116,11 @@ public class Exercises2 {
         var pathName = "./src/net/braniumacademy/lesson102/exercises2/input.dat";
         var input = new Scanner(new File(pathName));
         var t = input.nextInt(); // số bộ test
-        var testCount = 1; // biến lưu thứ tự các test
-        while (t-- > 0) {
+        for (int test = 1; test <= t; test++) {
             var n = input.nextInt(); // số đỉnh
             var edge = input.nextInt(); // số cạnh
             Vertex[] vertices = new Vertex[n];
+            // gán nhãn cho các đỉnh
             for (int i = 0; i < n; i++) {
                 var label = (char) (i + 1 + 48);
                 addVertex(vertices, label, i);
@@ -134,7 +134,7 @@ public class Exercises2 {
             }
             // Liệt kê các thành phần liên thông của đồ thị
             var result = findSCComponents(vertices, adjMatrix);
-            System.out.printf("Test %d: %d\n", testCount++, result);
+            System.out.printf("Test %d: %d\n", test, result);
         }
         input.close();
     }

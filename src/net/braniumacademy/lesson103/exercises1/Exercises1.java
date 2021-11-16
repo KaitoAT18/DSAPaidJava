@@ -60,9 +60,9 @@ public class Exercises1 {
     public static void main(String[] args) throws FileNotFoundException {
         var pathName = "./src/net/braniumacademy/lesson103/exercises1/input.dat";
         var input = new Scanner(new File(pathName));
-        var t = input.nextInt(); // số đỉnh
-        while (t-- > 0) {
-            var n = input.nextInt(); // đỉnh đích
+        var t = input.nextInt(); // số bộ test
+        for (int test = 1; test <= t; test++) {
+            var n = input.nextInt(); // số đỉnh của bộ test hiện tại
             Vertex[] vertices = new Vertex[n];
             for (int i = 0; i < n; i++) {
                 var label = (char) (i + 1 + 48);
@@ -76,6 +76,7 @@ public class Exercises1 {
                     addEdge(adjMatrix, i, j, value);
                 }
             }
+            System.out.printf("Test %d: \n", test);
             // kiểm tra tính liên thông
             if (bfs(vertices, adjMatrix, 0)) {
                 System.out.println("YES");

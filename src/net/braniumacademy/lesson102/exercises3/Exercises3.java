@@ -102,8 +102,7 @@ public class Exercises3 {
         var pathName = "./src/net/braniumacademy/lesson102/exercises3/input.dat";
         var input = new Scanner(new File(pathName));
         var t = input.nextInt(); // số bộ test
-        var testCount = 1; // biến lưu thứ tự các test
-        while (t-- > 0) {
+        for (int test = 1; test <= t; test++) {
             var n = input.nextInt(); // số đỉnh
             var edge = input.nextInt(); // số cạnh
             Vertex[] vertices = new Vertex[n];
@@ -119,7 +118,7 @@ public class Exercises3 {
                 addEdge(adjMatrix, start - 1, end - 1, true);
             }
             // Liệt kê các thành phần liên thông của đồ thị
-            System.out.printf("Test %d: \n", testCount++);
+            System.out.printf("Test %d: \n", test);
             printStrongConnectedComponents(vertices, adjMatrix);
         }
         input.close();
