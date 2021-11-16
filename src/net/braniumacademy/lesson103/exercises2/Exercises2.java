@@ -42,11 +42,6 @@ public class Exercises2 {
         vertices[label] = new Vertex(label, false);
     }
 
-    public static void addEdge(boolean[][] adj, int start, int end, boolean value) {
-        adj[start][end] = value;
-        adj[end][start] = value;
-    }
-
     // sử dụng thuật toán duyệt theo chiều rộng duyệt các thành phần liên thông
     public static int bfs(Vertex[] vertices, Vector<Integer>[] adj, int v) {
         Queue<Integer> queue = new Queue<>();
