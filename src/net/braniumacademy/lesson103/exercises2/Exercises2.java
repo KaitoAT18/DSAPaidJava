@@ -90,7 +90,7 @@ public class Exercises2 {
             vertices[i].setBlocked(state);
         }
         input.close();
-        // Liệt kê các thành phần liên thông của đồ thị
+        // in ra kết quả
         var result = findMax(vertices, adj);
         System.out.printf("%d\n", result);
     }
