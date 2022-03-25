@@ -101,7 +101,7 @@ public class LinkedList<T> {
             } else if (x == tail) { // xóa x, x là node tail
                 prevX.next = x.next;
                 tail = prevX;
-            } else { // xóa x, x là node (head, tail)
+            } else { // xóa x, x là node khác head, tail
                 prevX.next = x.next;
                 x.next = null;
             }

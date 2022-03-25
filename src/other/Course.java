@@ -20,7 +20,6 @@ public class Course {
         time = "";
         subject = null;
         transcriptOfStudents = new ArrayList<>();
-
     }
 
     public Course(String id, String name,

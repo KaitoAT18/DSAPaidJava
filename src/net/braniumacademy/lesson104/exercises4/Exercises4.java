@@ -11,7 +11,7 @@ public class Exercises4 {
     static class Vertex implements Comparable<Vertex> { // lớp mô tả thông tin 1 đỉnh
         private static int autoIndex = 0; // vị trí tự tăng từ 0
         private final char label;   // tên đỉnh
-        private int weight;      // trọng số tính từ đỉnh bắt đầu
+        private long weight;      // trọng số tính từ đỉnh bắt đầu
         private final int index;          // vị trí đỉnh trong danh sách
 
         public Vertex(char label) {
@@ -60,12 +60,12 @@ public class Exercises4 {
         List<Vertex> unvisited = new ArrayList<>(); // tạo tập đỉnh chưa thăm
         Vertex[] prev = new Vertex[vertices.length]; // mảng chứa lưu vết đường đi
         for (Vertex vertex : vertices) { // xét từng đỉnh
-            vertex.weight = -1; // khởi tạo giá trị trọng số cho đỉnh
+            vertex.weight = Integer.MAX_VALUE; // khởi tạo giá trị trọng số cho đỉnh
             unvisited.add(vertex); // thêm đỉnh vào tập đỉnh unvisited
         }
         vertices[source].weight = 0; // đỉnh bắt đầu duyệt sẽ có trọng số bằng 0
         while (!unvisited.isEmpty()) { // lặp đến khi danh sách unvisited rỗng
-            var u = findMaxWeightVertex(unvisited); // tìm đỉnh có trọng số nhỏ nhất
+            var u = findMinWeightVertex(unvisited); // tìm đỉnh có trọng số nhỏ nhất
             if (u.label == target) { // nếu u là đỉnh đích
                 break; // kết thúc thuật toán
             }
@@ -73,7 +73,7 @@ public class Exercises4 {
             for (int v = 0; v < vertices.length; v++) { // duyệt từng đỉnh của đồ thị
                 if (weightMatrix[u.index][v] != 0 && unvisited.contains(vertices[v])) {
                     var alt = u.weight + weightMatrix[u.index][v]; // tính trọng số thành phần
-                    if (alt > vertices[v].weight) { // nếu trọng số tính được nhỏ hơn thì
+                    if (alt < vertices[v].weight) { // nếu trọng số tính được nhỏ hơn thì
                         vertices[v].weight = alt; // cập nhật trọng số của đỉnh v
                         prev[v] = u; // cập nhật đỉnh trước v là u
                     }
@@ -83,12 +83,12 @@ public class Exercises4 {
         return prev; // trả về danh sách chứa đường đi của thuật toán
     }
 
-    // tìm đỉnh có trọng số lớn nhất
-    private static Vertex findMaxWeightVertex(List<Vertex> unvisited) {
+    // tìm đỉnh có trọng số nhỏ nhất
+    private static Vertex findMinWeightVertex(List<Vertex> unvisited) {
         var minIndex = 0;
-        double minWeight = 0;
+        double minWeight = Integer.MAX_VALUE;
         for (int i = 0; i < unvisited.size(); i++) {
-            if (minWeight < unvisited.get(i).weight) {
+            if (minWeight > unvisited.get(i).weight) {
                 minIndex = i;
                 minWeight = unvisited.get(i).weight;
             }
@@ -106,11 +106,15 @@ public class Exercises4 {
             var label = (char) (i + 1 + 48);
             addVertex(vertices, label, i);
         }
-        // đọc ma trận kề
+        // đọc ma trận trọng số
         int[][] weightMatrix = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                weightMatrix[i][j] = input.nextInt();
+                int value = input.nextInt();
+                if(value > 0) {
+                    value = Integer.MAX_VALUE - value;
+                }
+                weightMatrix[i][j] = value;
             }
         }
         input.close();
@@ -121,7 +125,7 @@ public class Exercises4 {
     }
 
     private static void showPath(Vertex[] prev, Vertex target) {
-        System.out.printf("%d\n", target.weight);
+        System.out.printf("%d\n", Integer.MAX_VALUE - target.weight);
         var prevVertex = prev[target.index];
         List<Vertex> trace = new ArrayList<>();
         trace.add(target);
