@@ -32,7 +32,7 @@ public class Exercises4 {
 
     // chiến lược bottom-up
     private static int findMinCost(int[][] cost, int m, int n) {
-        int[][] result = new int[m + 1][n + 1]; // mảng lưu chi phí đi đến từng ô (i, j) với i <=m và j <= n
+        int[][] result = new int[m + 1][n + 1]; // mảng lưu chi phí đi đến từng ô (i, j) với i <= m và j <= n
         // gán giá trị cho phần tử đầu tiên trong result:
         result[0][0] = cost[0][0];
         // cập nhật hàng đầu tiên trong result:
