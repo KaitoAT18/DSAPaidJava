@@ -82,7 +82,7 @@ public class Exercises5 {
     private static void printSolution(int[] colors) {
         System.out.println("Sau đây là một lời giải: ");
         for (int color : colors) {
-            System.out.println(color + " ");
+            System.out.print(color + " ");
         }
         System.out.println();
     }
