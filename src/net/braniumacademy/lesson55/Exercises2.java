@@ -13,8 +13,12 @@ public class Exercises2 {
         BinarySearchTree<String> tree = new BinarySearchTree<>();
         tree.add("One");
         tree.add("One");
+        tree.add("One");
+        tree.add("One");
+        tree.add("One");
         tree.add("Four");
         tree.add("Four");
+        tree.add("Two");
         tree.add("Two");
         tree.add("Two");
         tree.add("Five");
@@ -25,19 +29,24 @@ public class Exercises2 {
         tree.add("Eight");
         tree.add("Nine");
         tree.add("Nine");
-        Scanner input = new Scanner(System.in);
+        tree.add("Nine");
+        tree.add("Nine");
+        tree.add("Nine");
+
         System.out.println("Các node trong cây: ");
         tree.inOrder();
+
         System.out.println("Các node có số lần xuất hiện nhiều nhất trong cây: ");
         tree.showMaxOccurrence();
+
         System.out.println("Các node có số lần xuất hiện ít nhất trong cây: ");
         tree.showMinOccurrence();
-        System.out.println("Nhập biên dưới: ");
-        int from = input.nextInt();
-        System.out.println("Nhập biến trên: ");
-        int to = input.nextInt();
-        System.out.printf("Các node có số lần xuất hiện trong [%d, %d]:\n", from, to);
-        tree.showNode(from, to);
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("Nhập số lần xuất hiện cần tìm: ");
+        int occ = input.nextInt();
+        System.out.printf("Các node có số lần xuất hiện bằng [%d]:\n", occ);
+        tree.showNode(occ);
         System.out.println();
     }
 
@@ -79,17 +88,36 @@ public class Exercises2 {
             return r;
         }
 
-        public void showNode(int from, int to) {
-            showNode(root, from, to);
+        public void showNode(int occ) {
+            if(!findNode(root, occ)) { // nếu không có số lần xuất hiện cần tìm
+                System.out.println("==> Không có kết quả.");
+            } else { // nếu có, hiển thị các node thỏa mãn
+                showNode(root, occ);
+            }
         }
 
-        private void showNode(Node<T> r, int from, int to) {
+        private boolean findNode(Node<T> r, int occ) {
+            if(r == null) {
+                return false;
+            } else {
+                if(r.countNode == occ) {
+                    return true;
+                } else {
+                    boolean resultLeft = findNode(r.leftNode, occ);
+                    boolean resultRight = findNode(r.rightNode, occ);
+                    return resultLeft || resultRight;
+                }
+            }
+        }
+
+
+        private void showNode(Node<T> r, int occ) {
             if (r != null) {
-                showNode(r.leftNode, from, to);
-                if (r.countNode >= from && r.countNode <= to) {
+                showNode(r.leftNode, occ);
+                if (r.countNode == occ) {
                     System.out.println(r.data + " - " + r.countNode);
                 }
-                showNode(r.rightNode, from, to);
+                showNode(r.rightNode, occ);
             }
         }
 
