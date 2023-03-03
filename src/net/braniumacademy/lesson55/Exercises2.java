@@ -1,5 +1,11 @@
 package net.braniumacademy.lesson55;
 
+/**
+ * @author Branium Academy
+ * @version 2023.03
+ * @see https://braniumacademy.net
+ */
+
 import java.util.Scanner;
 
 public class Exercises2 {
@@ -7,22 +13,25 @@ public class Exercises2 {
         BinarySearchTree<String> tree = new BinarySearchTree<>();
         tree.add("One");
         tree.add("One");
-        tree.add("One");
+        tree.add("Four");
         tree.add("Four");
         tree.add("Two");
         tree.add("Two");
         tree.add("Five");
         tree.add("Five");
         tree.add("Seven");
+        tree.add("Seven");
         tree.add("Eight");
+        tree.add("Eight");
+        tree.add("Nine");
         tree.add("Nine");
         Scanner input = new Scanner(System.in);
         System.out.println("Các node trong cây: ");
         tree.inOrder();
         System.out.println("Các node có số lần xuất hiện nhiều nhất trong cây: ");
-        tree.showMaxOccurrent();
+        tree.showMaxOccurrence();
         System.out.println("Các node có số lần xuất hiện ít nhất trong cây: ");
-        tree.showMinOccurrent();
+        tree.showMinOccurrence();
         System.out.println("Nhập biên dưới: ");
         int from = input.nextInt();
         System.out.println("Nhập biến trên: ");
@@ -38,7 +47,7 @@ public class Exercises2 {
         static class Node<T> {
             private Node<T> leftNode;
             private Node<T> rightNode;
-            private T data;
+            private final T data;
             private int countNode;
 
             public Node(T data) {
@@ -97,80 +106,76 @@ public class Exercises2 {
             }
         }
 
-        private int findMinOccurrent(Node<T> r) {
+        private int findMinOccurrence(Node<T> r) {
             if (r == null) {
-                return 1;
+                return 0;
+            } else if (r.leftNode == null && r.rightNode == null) {
+                return r.countNode;
+            } else {
+                int count = r.countNode;
+                int countLeft = count;
+                if (r.leftNode != null) {
+                    countLeft = findMinOccurrence(r.leftNode);
+                }
+                int countRight = count;
+                if (r.rightNode != null) {
+                    countRight = findMinOccurrence(r.rightNode);
+                }
+                return Math.min(count, Math.min(countRight, countLeft));
             }
-            int count = r.countNode;
-            int countLeft = findMinOccurrent(r.leftNode);
-            int countRight = findMinOccurrent(r.rightNode);
-            return Math.min(count, Math.min(countRight, countLeft));
         }
 
-        private void inOrderMinOccurent(Node<T> r, int min) {
+        private void inOrderMinOccurrence(Node<T> r, int min) {
             if (r != null) {
-                inOrderMinOccurent(r.leftNode, min);
+                inOrderMinOccurrence(r.leftNode, min);
                 if (r.countNode == min) {
                     System.out.println(r.data + " - " + r.countNode);
                 }
-                inOrderMinOccurent(r.rightNode, min);
+                inOrderMinOccurrence(r.rightNode, min);
             }
         }
 
-        private void inOrderMaxOccurent(Node<T> r, int max) {
+        private void inOrderMaxOccurrence(Node<T> r, int max) {
             if (r != null) {
-                inOrderMaxOccurent(r.leftNode, max);
+                inOrderMaxOccurrence(r.leftNode, max);
                 if (r.countNode == max) {
                     System.out.println(r.data + " - " + r.countNode);
                 }
-                inOrderMaxOccurent(r.rightNode, max);
+                inOrderMaxOccurrence(r.rightNode, max);
             }
         }
 
-        // tìm kiếm node có giá trị x
-        public boolean search(T x) {
-            return search(root, x);
-        }
-
-        public void showMaxOccurrent() {
-            if(root != null) {
-                int maxOcc = findMaxOccurrent(root);
-                inOrderMaxOccurent(root, maxOcc);
-            }
-        }
-
-        public void showMinOccurrent() {
+        public void showMaxOccurrence() {
             if (root != null) {
-                int min = findMinOccurrent(root);
-                inOrderMinOccurent(root, min);
+                int maxOcc = findMaxOccurrence(root);
+                inOrderMaxOccurrence(root, maxOcc);
             }
         }
 
-        private int findMaxOccurrent(Node<T> r) {
-            if (r == null) {
+        public void showMinOccurrence() {
+            if (root != null) {
+                int min = findMinOccurrence(root);
+                inOrderMinOccurrence(root, min);
+            }
+        }
+
+        private int findMaxOccurrence(Node<T> r) {
+            if (r == null) { // nếu cây rỗng => không có gì cả
                 return 0;
+            } else if (r.leftNode == null && r.rightNode == null) { // nếu node r là node lá
+                return r.countNode;
+            } else {
+                int count = r.countNode;
+                int countLeft = count;
+                if (r.leftNode != null) { // nếu có cành trái
+                    countLeft = findMaxOccurrence(r.leftNode); // tìm max ở cành trái
+                }
+                int countRight = count;
+                if (r.rightNode != null) { // nếu có cành phải
+                    countRight = findMaxOccurrence(r.rightNode); // tìm max ở cành phải
+                }
+                return Math.max(count, Math.max(countRight, countLeft));
             }
-            int count = r.countNode;
-            int countLeft = findMaxOccurrent(r.leftNode);
-            int countRight = findMaxOccurrent(r.rightNode);
-            return Math.max(count, Math.max(countRight, countLeft));
-        }
-
-        private boolean search(Node<T> r, T x) {
-            if (r == null) { // nếu r không tồn tại
-                return false; // return false
-            }
-            if (x.compareTo(r.data) == 0) { // nếu tìm thấy node có giá trị bằng x
-                return true;
-            }
-            if (r.data.compareTo(x) < 0) { // nếu r.data < x
-                return search(r.rightNode, x); // tìm x bên cây con phải
-            }
-            if (r.data.compareTo(x) > 0) { // nếu r.data > x
-                return search(r.leftNode, x); // tìm x bên cây con trái
-            }
-            return false; // mặc định không tìm thấy x
         }
     }
-
 }
