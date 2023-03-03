@@ -110,7 +110,6 @@ public class Exercises2 {
             }
         }
 
-
         private void showNode(Node<T> r, int occ) {
             if (r != null) {
                 showNode(r.leftNode, occ);
